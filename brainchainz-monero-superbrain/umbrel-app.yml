@@ -1,0 +1,28 @@
+manifestVersion: 1.1
+id: brainchainz-monero-superbrain
+category: utilities
+name: Monero Superbrain
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
+version: "1.0.0"
+tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
+description: >-
+  Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
+  CPU miner (XMRig), and a web dashboard for monitoring and control. Connects to your existing Umbrel Monero node.
+  Supports LAN worker and Tailscale connections.
+developer: SirJamzAlot
+website: https://x.com/MgkMshrmBrkfst
+repo: https://github.com/brainchainz/Monero-Superbrain
+support: https://github.com/brainchainz/Monero-Superbrain/issues
+port: 3000
+dependencies:
+  - monero
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/4.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  v1.0.0: Initial release, beta testing. Includes P2Pool, XMRig, XMRig-proxy, web dashboard with themes, earnings tracker, and auto-configuration.

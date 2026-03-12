@@ -1,0 +1,37 @@
+manifestVersion: 1.1
+id: brainchainz-monero-superpay
+category: finance
+name: Monero SuperPay
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
+version: "1.0.0"
+tagline: Accept Monero payments with a full point-of-sale system
+description: >-
+  Monero SuperPay is a self-hosted, trustless point-of-sale system for
+  accepting Monero (XMR) payments. Connect multiple PoS devices via QR code,
+  manage a product catalog, process orders with a shopping cart, and track
+  payments in real-time — all without third parties.
+
+  Features include a web dashboard, product catalog with images, three PoS modes
+  (keypad, product grid, full cart), multi-device management, order tracking,
+  and sales analytics. Any tablet with a browser becomes a register.
+
+  View-only wallet — your spend keys never leave your device.
+developer: SirJamzAlot
+website: https://github.com/brainchainz/Monero-Superbrain
+repo: https://github.com/brainchainz/Monero-Superbrain
+support: https://github.com/brainchainz/Monero-Superbrain/issues
+port: 3033
+dependencies:
+  - monero
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/4.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/5.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  v1.0.0: Initial release. Dashboard, product catalog, cart/order system,
+  QR device pairing (Local/Tor/Tailscale), web PoS.

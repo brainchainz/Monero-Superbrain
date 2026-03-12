@@ -1,0 +1,77 @@
+services:
+  # Umbrel App Proxy (Required for Auth & Tor)
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    container_name: brainchainz_superpay_app_proxy
+    restart: on-failure
+    environment:
+      - APP_HOST=brainchainz_superpay_web
+      - APP_PORT=3033
+      - LOG_LEVEL=debug
+      - PROXY_AUTH_ADD_HEADER_PREFIX=X-Webauth-
+    networks:
+      - default
+
+  # Monero Wallet RPC (view-only wallet — no spend keys on server)
+  # Connects to Umbrel's existing Monero node via umbrel_main_network
+  monero-wallet-rpc:
+    image: sethsimmons/simple-monero-wallet-rpc:latest
+    container_name: brainchainz_superpay_wallet_rpc
+    restart: on-failure
+    user: "1000:1000"
+    entrypoint: [ "monero-wallet-rpc" ]
+    command:
+      - --non-interactive
+      - --rpc-bind-ip=0.0.0.0
+      - --rpc-bind-port=18082
+      - --confirm-external-bind
+      - --daemon-address=${APP_MONERO_NODE_IP:-monero_monerod_1}:${APP_MONERO_RPC_PORT:-18081}
+      - --daemon-login=${APP_MONERO_RPC_USER:-monero}:${APP_MONERO_RPC_PASS:-monero}
+      - --wallet-dir=/home/monero/wallet
+      - --disable-rpc-login
+    volumes:
+      - wallet-data:/home/monero/wallet
+    networks:
+      - default
+      - umbrel_main_network
+
+  # Monero SuperPay — Dashboard + API + Web PoS
+  web:
+    image: sirjamzalot/monero-superpay:latest
+    container_name: brainchainz_superpay_web
+    restart: on-failure
+    depends_on:
+      - monero-wallet-rpc
+    environment:
+      - PORT=3033
+      - DATABASE_PATH=/data/merchant.db
+      - UPLOAD_DIR=/data/uploads
+      - FIAT_CURRENCY=${APP_MONERO_SUPERPAY_FIAT:-USD}
+      - APP_SECRET=${APP_SEED:-supersecret}
+      - BUSINESS_NAME=${APP_MONERO_SUPERPAY_BUSINESS_NAME:-Monero SuperPay}
+      - SERVER_URL=http://${DEVICE_DOMAIN_NAME:-umbrel.local}:${APP_MONERO_SUPERPAY_PORT:-3033}
+      - MONERO_NODE_IP=${APP_MONERO_NODE_IP:-monero_monerod_1}
+      - MONERO_RPC_PORT=${APP_MONERO_RPC_PORT:-18081}
+      - MONERO_RPC_USER=${APP_MONERO_RPC_USER:-monero}
+      - MONERO_RPC_PASS=${APP_MONERO_RPC_PASS:-monero}
+      - WALLET_RPC_URL=http://monero-wallet-rpc:18082/json_rpc
+      - TOR_HOSTNAME_FILE=/tor/hostname
+    volumes:
+      - ${APP_DATA_DIR}/superpay-data:/data
+      # Mount Umbrel's Monero app data to read RPC credentials on init
+      - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
+    networks:
+      - default
+      - umbrel_main_network
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.99.1.0/24
+  umbrel_main_network:
+    external: true
+
+volumes:
+  wallet-data:

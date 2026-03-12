@@ -1,0 +1,92 @@
+services:
+  # Umbrel App Proxy (Required for Auth & Tor)
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    container_name: monero_superbrain_app_proxy
+    restart: on-failure
+    environment:
+      - APP_HOST=monero_superbrain_dashboard
+      - APP_PORT=3000
+      - LOG_LEVEL=debug
+      - PROXY_AUTH_ADD_HEADER_PREFIX=X-Webauth-
+    networks:
+      - default
+
+  # Web Dashboard & API Proxy
+  dashboard:
+    image: sirjamzalot/monero-superbrain-dashboard:latest
+    container_name: monero_superbrain_dashboard
+    restart: always
+    environment:
+      - APP_DATA_DIR=${APP_DATA_DIR:-/data}
+      - APP_MONERO_NODE_IP=${APP_MONERO_NODE_IP:-monero_monerod_1}
+      - APP_MONERO_RPC_PORT=${APP_MONERO_RPC_PORT:-18081}
+      - APP_MONERO_ZMQ_PORT=${APP_MONERO_ZMQ_PORT:-18083}
+      - APP_MONERO_RPC_USER=${APP_MONERO_RPC_USER:-monero}
+      - APP_MONERO_RPC_PASS=${APP_MONERO_RPC_PASS:-monero}
+    networks:
+      - default
+      - umbrel_main_network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${APP_DATA_DIR:-/data}:/data
+      # Mount Umbrel's Monero app data to read RPC credentials
+      - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
+
+  # Decentralized Mining Pool
+  p2pool:
+    image: sethsimmons/p2pool:latest
+    container_name: monero_superbrain_p2pool
+    restart: always
+    entrypoint: /bin/sh
+    command: >
+      -c "if [ -f /data/.env ]; then . /data/.env; fi; WALLET=\"$${WALLET_ADDRESS:-43sEimq64TtLoBaEzzxf7wVd4XcZPuGtNRP7zhT7WAgB3th9dvCrJMad99pZNKBRDmJXXXUxeZie7W5tsm7TWVrPHbxvins}\"; CHAIN=\"$${P2POOL_CHAIN:---mini}\"; echo \"Starting P2Pool with wallet: $$WALLET... chain: $$CHAIN\"; exec p2pool --wallet $$WALLET --host ${APP_MONERO_NODE_IP:-monero_monerod_1} --rpc-port ${APP_MONERO_RPC_PORT:-18081} --zmq-port ${APP_MONERO_ZMQ_PORT:-18083} --stratum 0.0.0.0:3333 --p2p 0.0.0.0:37889 --addpeers 65.21.227.114:37888,node.sethforprivacy.com:37888 --loglevel 3 $$CHAIN --rpc-login ${APP_MONERO_RPC_USER:-monero}:${APP_MONERO_RPC_PASS:-monero}"
+    ports:
+      - "37889:37889"
+      - "3333:3333"
+    volumes:
+      - ${APP_DATA_DIR:-/data}:/data
+    networks:
+      - default
+      - umbrel_main_network
+
+  # Miner Connection Proxy with Web Dashboard
+  xmrig-proxy:
+    image: techcf/xmrig-proxy:latest
+    container_name: monero_superbrain_proxy
+    restart: always
+    depends_on:
+      - p2pool
+    command: >
+      xmrig-proxy -o p2pool:3333 -u SuperbrainProxy -b 0.0.0.0:8888 --http-host 0.0.0.0 --http-port 8080 --http-access-token superbrain
+    ports:
+      - "8888:8888"
+    volumes:
+      - ${APP_DATA_DIR:-/data}/proxy:/data
+    networks:
+      - default
+
+  # CPU Mining Software
+  xmrig:
+    image: minerboy/xmrig:latest
+    container_name: monero_superbrain_xmrig
+    restart: always
+    privileged: true
+    depends_on:
+      - xmrig-proxy
+    entrypoint: /bin/sh
+    command: >
+      -c "if [ -f /data/.env ]; then . /data/.env; fi; THREADS=\"$${XMRIG_THREADS:-0}\"; echo 1280 > /proc/sys/vm/nr_hugepages 2>/dev/null; echo 3 > /proc/sys/vm/nr_hugepages_mempolicy 2>/dev/null; sleep 2; rm -f /etc/xmrig/config.json 2>/dev/null; THREAD_ARG=''; if [ \"$$THREADS\" != '0' ] && [ -n \"$$THREADS\" ]; then THREAD_ARG=\"--threads $$THREADS\"; fi; echo \"Starting XMRig with threads: $${THREADS:-auto}\"; exec /app/xmrig --config=/dev/null -o xmrig-proxy:8888 -u 'Sup3rBra1n XMR1G' -p x --coin monero --donate-level 0 -k --randomx-1gb-pages --huge-pages-jit $$THREAD_ARG"
+    volumes:
+      - ${APP_DATA_DIR:-/data}:/data
+    networks:
+      - default
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.99.99.0/24
+  umbrel_main_network:
+    external: true
