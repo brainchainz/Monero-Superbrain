@@ -24,11 +24,13 @@ port: 3033
 dependencies:
   - monero
 gallery:
-  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/1.png
-  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/2.png
-  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/3.png
-  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/4.png
-  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/gallery/5.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/4.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/5.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/6.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-SuperPay/main/gallery/7.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
