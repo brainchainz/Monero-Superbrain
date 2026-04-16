@@ -3,7 +3,7 @@ id: brainchainz-monero-superpay
 category: finance
 name: Monero SuperPay
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
-version: "1.1.0"
+version: "1.2.0"
 tagline: Accept Monero payments with a full point-of-sale system
 description: >-
   Monero SuperPay is a self-hosted, trustless point-of-sale system for
@@ -35,5 +35,7 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.1.0: New app icon. Multi-arch Docker image (amd64 + arm64).
-  Codebase migrated to monorepo (github.com/brainchainz/Monero-SuperPay).
+  v1.2.0: Manual node picker (public, custom, Tor) alongside auto-detected Umbrel node.
+  Store import/export (.superpay files). Order cancellation fix. Receipt print fix.
+  Security hardening: rate limiting, CSV injection prevention, WebSocket store filtering,
+  wallet overwrite protection. PIN lock crypto.subtle fallback for HTTP access.
