@@ -9,6 +9,10 @@ services:
       - APP_PORT=3033
       - LOG_LEVEL=debug
       - PROXY_AUTH_ADD_HEADER_PREFIX=X-Webauth-
+      # Whitelist POS device paths so waitstaff don't need the Umbrel password.
+      # Admin routes (/api/settings, /api/wallet, /api/stores, etc.) stay behind Umbrel auth.
+      # Device API (/api/pos/*) has its own API key auth; pairing is rate-limited.
+      - PROXY_AUTH_WHITELIST=/pos,/monitor,/assets,/api/devices/pair,/api/pos/,/uploads
     networks:
       - default
 
@@ -58,8 +62,12 @@ services:
       - TOR_HOSTNAME_FILE=/tor/hostname
     volumes:
       - ${APP_DATA_DIR}/superpay-data:/data
+      # Share wallet volume so the UI can list/delete wallet files
+      - wallet-data:/wallet
       # Mount Umbrel's Monero app data to read RPC credentials on init
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
+      # Mount Tor hostname so the app can auto-detect the .onion address
+      - /home/umbrel/umbrel/tor/data/app-brainchainz-monero-superpay/hostname:/tor/hostname:ro
     networks:
       - default
       - umbrel_main_network

@@ -3,7 +3,7 @@ id: brainchainz-monero-superpay
 category: finance
 name: Monero SuperPay
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
-version: "1.2.0"
+version: "1.2.1"
 tagline: Accept Monero payments with a full point-of-sale system
 description: >-
   Monero SuperPay is a self-hosted, trustless point-of-sale system for
@@ -35,7 +35,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.2.0: Manual node picker (public, custom, Tor) alongside auto-detected Umbrel node.
-  Store import/export (.superpay files). Order cancellation fix. Receipt print fix.
+  v1.2.1: Store export/import (.superpay files) now carries all products, images, settings,
+  and wallet credentials for full cross-platform portability (Mac to Umbrel and back).
+  POS devices bypass Umbrel password — QR scan goes straight to the terminal.
+  Wallet file management (list, connect, delete) in Settings.
+  Tor .onion address auto-detected and shown in Settings.
+  Accurate wallet sync progress display.
+  Manual node picker (public, custom, Tor) alongside Umbrel's auto-configured node.
+  Order cancellation fix. Receipt print fix. PIN lock screen.
   Security hardening: rate limiting, CSV injection prevention, WebSocket store filtering,
-  wallet overwrite protection. PIN lock crypto.subtle fallback for HTTP access.
+  wallet overwrite protection.
