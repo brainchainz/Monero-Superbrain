@@ -10,6 +10,7 @@ services:
       - PROXY_AUTH_ADD_HEADER_PREFIX=***
     networks:
       - default
+      - umbrel_main_network
 
   dashboard:
     image: sirjamzalot/monero-superbrain-dashboard:v1.1
