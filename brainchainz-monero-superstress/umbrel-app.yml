@@ -1,0 +1,40 @@
+manifestVersion: 1.1
+id: brainchainz-monero-superstress
+category: finance
+name: Monero Superstress
+icon: https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/icon.png
+version: "1.6.0"
+tagline: Stress-test the bleeding edge of Monero privacy
+description: >-
+  Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
+  through Tor. FCMP++ (Full-Chain Membership Proofs) is the upcoming privacy
+  upgrade that eliminates ring signature limitations — this stressnet lets you
+  test it before mainnet launch.
+
+
+  Features a premium dark dashboard to monitor sync progress, network stats,
+  peer connections, and difficulty. Includes a built-in wallet lab for creating
+  wallets, sending test FCMP++ transactions, solo mining, and spamming the
+  stressnet with test transactions.
+
+
+  All traffic is routed through Tor — zero clearnet connections. Your IP is
+  never exposed during testing. The stressnet has a low anonymity set, so Tor
+  routing is critical for protecting testers.
+developer: brainchainz
+website: https://github.com/brainchainz/monero-superstress
+repo: https://github.com/brainchainz/monero-superstress
+support: https://github.com/brainchainz/monero-superstress/issues
+port: 4050
+dependencies: []
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/gallery/1.jpeg
+  - https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/gallery/2.jpeg
+  - https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/gallery/3.jpeg
+  - https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/gallery/4.jpeg
+  - https://raw.githubusercontent.com/brainchainz/monero-superstress/main/brainchainz-monero-superstress/gallery/5.jpeg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: brainchainz
+submission: https://github.com/getumbrel/umbrel-apps/pull/

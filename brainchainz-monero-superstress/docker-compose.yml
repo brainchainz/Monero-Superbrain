@@ -1,0 +1,126 @@
+services:
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    container_name: brainchainz_monero_superstress_app_proxy
+    restart: on-failure
+    environment:
+      - APP_HOST=brainchainz_monero_superstress_web
+      - APP_PORT=4050
+    networks:
+      - default
+
+  tor:
+    image: getumbrel/tor:0.4.7.8
+    container_name: brainchainz_monero_superstress_tor
+    restart: on-failure
+    user: "1000:1000"
+    command: ["-f", "/etc/tor/torrc"]
+    volumes:
+      - ${APP_DATA_DIR:-./data}/tor:/tmp/tor
+      - ./torrc:/etc/tor/torrc:ro
+    networks:
+      default:
+        ipv4_address: 10.99.10.2
+
+  monerod:
+    image: sirjamzalot/monero-stressnet:latest
+    container_name: brainchainz_monero_superstress_monerod
+    restart: on-failure
+    user: "1000:1000"
+    command: >-
+      --testnet
+      --non-interactive
+      --rpc-bind-ip=0.0.0.0
+      --rpc-bind-port=28081
+      --confirm-external-bind
+      --proxy=10.99.10.2:9050
+      --proxy-allow-dns-leaks
+      --tx-proxy=tor,10.99.10.2:9050
+      --out-peers=32
+      --data-dir=/data
+      --prune-blockchain
+      --enable-dns-blocklist
+      --no-igd
+    volumes:
+      - ${APP_DATA_DIR:-./data}/db:/data
+    depends_on:
+      - tor
+    networks:
+      default:
+        ipv4_address: 10.99.10.3
+
+  wallet-rpc:
+    image: sirjamzalot/monero-stressnet:latest
+    container_name: brainchainz_monero_superstress_wallet_rpc
+    restart: on-failure
+    user: "1000:1000"
+    entrypoint: ["monero-wallet-rpc"]
+    command: >-
+      --testnet
+      --daemon-address=10.99.10.3:28081
+      --wallet-dir=/home/monero/wallet
+      --rpc-bind-ip=0.0.0.0
+      --rpc-bind-port=28083
+      --disable-rpc-login
+      --confirm-external-bind
+      --trusted-daemon
+    volumes:
+      - ${APP_DATA_DIR:-./data}/wallet:/home/monero/wallet
+    depends_on:
+      - monerod
+    networks:
+      default:
+        ipv4_address: 10.99.10.4
+
+  spammer-wallet-rpc:
+    image: sirjamzalot/monero-stressnet:latest
+    container_name: brainchainz_monero_superstress_spammer_wallet_rpc
+    restart: on-failure
+    user: "1000:1000"
+    entrypoint: ["monero-wallet-rpc"]
+    command: >-
+      --testnet
+      --daemon-address=10.99.10.3:28081
+      --wallet-dir=/home/monero/spammer-wallet
+      --rpc-bind-ip=0.0.0.0
+      --rpc-bind-port=28084
+      --disable-rpc-login
+      --confirm-external-bind
+      --trusted-daemon
+    volumes:
+      - ${APP_DATA_DIR:-./data}/spammer-wallet:/home/monero/spammer-wallet
+    depends_on:
+      - monerod
+    networks:
+      default:
+        ipv4_address: 10.99.10.7
+
+  web:
+    image: sirjamzalot/monero-stressnet-web:latest
+    container_name: brainchainz_monero_superstress_web
+    restart: on-failure
+    ports:
+      - "4050:4050"
+    environment:
+      - PORT=4050
+      - MONEROD_RPC=http://10.99.10.3:28081
+      - WALLET_RPC=http://10.99.10.4:28083
+      - SPAMMER_WALLET_RPC=http://10.99.10.7:28084
+      - MONITOR_DB_PATH=/data/monitor.db
+    volumes:
+      - ${APP_DATA_DIR:-./data}/monitor:/data
+      - ${APP_DATA_DIR:-./data}/wallet:/wallet-files
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - monerod
+      - wallet-rpc
+      - spammer-wallet-rpc
+    networks:
+      default:
+        ipv4_address: 10.99.10.5
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 10.99.10.0/24
