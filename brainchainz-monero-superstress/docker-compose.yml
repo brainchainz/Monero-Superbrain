@@ -19,8 +19,7 @@ services:
       - ${APP_DATA_DIR:-./data}/tor:/tmp/tor
       - ./torrc:/etc/tor/torrc:ro
     networks:
-      default:
-        ipv4_address: 10.99.10.2
+      - default
 
   monerod:
     image: sirjamzalot/monero-stressnet:latest
@@ -33,9 +32,9 @@ services:
       --rpc-bind-ip=0.0.0.0
       --rpc-bind-port=28081
       --confirm-external-bind
-      --proxy=10.99.10.2:9050
+      --proxy=brainchainz_monero_superstress_tor:9050
       --proxy-allow-dns-leaks
-      --tx-proxy=tor,10.99.10.2:9050
+      --tx-proxy=tor,brainchainz_monero_superstress_tor:9050
       --out-peers=32
       --data-dir=/data
       --prune-blockchain
@@ -46,8 +45,7 @@ services:
     depends_on:
       - tor
     networks:
-      default:
-        ipv4_address: 10.99.10.3
+      - default
 
   wallet-rpc:
     image: sirjamzalot/monero-stressnet:latest
@@ -57,7 +55,7 @@ services:
     entrypoint: ["monero-wallet-rpc"]
     command: >-
       --testnet
-      --daemon-address=10.99.10.3:28081
+      --daemon-address=brainchainz_monero_superstress_monerod:28081
       --wallet-dir=/home/monero/wallet
       --rpc-bind-ip=0.0.0.0
       --rpc-bind-port=28083
@@ -69,8 +67,7 @@ services:
     depends_on:
       - monerod
     networks:
-      default:
-        ipv4_address: 10.99.10.4
+      - default
 
   spammer-wallet-rpc:
     image: sirjamzalot/monero-stressnet:latest
@@ -80,7 +77,7 @@ services:
     entrypoint: ["monero-wallet-rpc"]
     command: >-
       --testnet
-      --daemon-address=10.99.10.3:28081
+      --daemon-address=brainchainz_monero_superstress_monerod:28081
       --wallet-dir=/home/monero/spammer-wallet
       --rpc-bind-ip=0.0.0.0
       --rpc-bind-port=28084
@@ -92,20 +89,17 @@ services:
     depends_on:
       - monerod
     networks:
-      default:
-        ipv4_address: 10.99.10.7
+      - default
 
   web:
     image: sirjamzalot/monero-stressnet-web:latest
     container_name: brainchainz_monero_superstress_web
     restart: on-failure
-    ports:
-      - "4050:4050"
     environment:
       - PORT=4050
-      - MONEROD_RPC=http://10.99.10.3:28081
-      - WALLET_RPC=http://10.99.10.4:28083
-      - SPAMMER_WALLET_RPC=http://10.99.10.7:28084
+      - MONEROD_RPC=http://brainchainz_monero_superstress_monerod:28081
+      - WALLET_RPC=http://brainchainz_monero_superstress_wallet_rpc:28083
+      - SPAMMER_WALLET_RPC=http://brainchainz_monero_superstress_spammer_wallet_rpc:28084
       - MONITOR_DB_PATH=/data/monitor.db
     volumes:
       - ${APP_DATA_DIR:-./data}/monitor:/data
@@ -116,11 +110,4 @@ services:
       - wallet-rpc
       - spammer-wallet-rpc
     networks:
-      default:
-        ipv4_address: 10.99.10.5
-
-networks:
-  default:
-    ipam:
-      config:
-        - subnet: 10.99.10.0/24
+      - default
