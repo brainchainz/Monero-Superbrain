@@ -64,6 +64,22 @@ services:
     - monerod
     networks:
     - default
+  relay:
+    image: sirjamzalot/monero-stressnet-relay:latest
+    container_name: brainchainz_monero_superstress_relay
+    restart: on-failure
+    environment:
+      - MONEROD_HOST=brainchainz_monero_superstress_monerod
+      - MONEROD_RPC_PORT=28081
+      - MONEROD_ZMQ_PORT=28082
+      - SERVER_PORT=3001
+      - DB_PATH=/data/relay.db
+    volumes:
+      - ${APP_DATA_DIR}/relay:/data
+    depends_on:
+      - monerod
+    networks:
+      - default
   web:
     image: sirjamzalot/monero-stressnet-web:latest
     container_name: brainchainz_monero_superstress_web
@@ -74,6 +90,7 @@ services:
     - WALLET_RPC=http://brainchainz_monero_superstress_wallet_rpc:28083
     - SPAMMER_WALLET_RPC=http://brainchainz_monero_superstress_spammer_wallet_rpc:28084
     - MONITOR_DB_PATH=/data/monitor.db
+    - RELAY_RPC=http://brainchainz_monero_superstress_relay:3001
     volumes:
     - ${APP_DATA_DIR}/monitor:/data
     - ${APP_DATA_DIR}/wallet:/wallet-files
