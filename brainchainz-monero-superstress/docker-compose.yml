@@ -13,11 +13,10 @@ services:
     image: getumbrel/tor:0.4.7.8
     container_name: brainchainz_monero_superstress_tor
     restart: on-failure
-    user: "1000:1000"
     command: ["-f", "/etc/tor/torrc"]
     volumes:
-      - ${APP_DATA_DIR:-./data}/tor:/tmp/tor
-      - ./torrc:/etc/tor/torrc:ro
+      - ${APP_DATA_DIR}/tor:/tmp/tor
+      - ${APP_DATA_DIR}/torrc:/etc/tor/torrc:ro
     networks:
       - default
 
@@ -41,7 +40,7 @@ services:
       --enable-dns-blocklist
       --no-igd
     volumes:
-      - ${APP_DATA_DIR:-./data}/db:/data
+      - ${APP_DATA_DIR}/db:/data
     depends_on:
       - tor
     networks:
@@ -63,7 +62,7 @@ services:
       --confirm-external-bind
       --trusted-daemon
     volumes:
-      - ${APP_DATA_DIR:-./data}/wallet:/home/monero/wallet
+      - ${APP_DATA_DIR}/wallet:/home/monero/wallet
     depends_on:
       - monerod
     networks:
@@ -85,7 +84,7 @@ services:
       --confirm-external-bind
       --trusted-daemon
     volumes:
-      - ${APP_DATA_DIR:-./data}/spammer-wallet:/home/monero/spammer-wallet
+      - ${APP_DATA_DIR}/spammer-wallet:/home/monero/spammer-wallet
     depends_on:
       - monerod
     networks:
@@ -102,8 +101,8 @@ services:
       - SPAMMER_WALLET_RPC=http://brainchainz_monero_superstress_spammer_wallet_rpc:28084
       - MONITOR_DB_PATH=/data/monitor.db
     volumes:
-      - ${APP_DATA_DIR:-./data}/monitor:/data
-      - ${APP_DATA_DIR:-./data}/wallet:/wallet-files
+      - ${APP_DATA_DIR}/monitor:/data
+      - ${APP_DATA_DIR}/wallet:/wallet-files
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - monerod
