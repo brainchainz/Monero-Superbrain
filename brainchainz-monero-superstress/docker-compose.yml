@@ -31,9 +31,6 @@ services:
       --rpc-bind-ip=0.0.0.0
       --rpc-bind-port=28081
       --confirm-external-bind
-      --proxy=brainchainz_monero_superstress_tor:9050
-      --proxy-allow-dns-leaks
-      --tx-proxy=tor,brainchainz_monero_superstress_tor:9050
       --out-peers=32
       --data-dir=/data
       --prune-blockchain
