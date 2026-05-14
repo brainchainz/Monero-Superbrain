@@ -95,6 +95,7 @@ services:
     - ${APP_DATA_DIR}/monitor:/data
     - ${APP_DATA_DIR}/wallet:/wallet-files
     - /var/run/docker.sock:/var/run/docker.sock
+    - ${APP_DATA_DIR}/db:/data/db:ro
     depends_on:
     - monerod
     - wallet-rpc
