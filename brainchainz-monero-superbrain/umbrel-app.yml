@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.1.0"
+version: "1.1.4"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,5 +25,12 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.1.0: Major update - custom Monero node picker (public, custom RPC, Tor fallback),
-  chain selector (main/mini/nano), updated dashboard UI.
+  v1.1.4: Chain normalization fix — bare chain names from .env (mini/nano/main) are now
+  correctly handled alongside p2pool-style flags (--mini/--nano/--main). Active chain detection
+  uses p2pool process cmdline to avoid mainnet false positives. Dashboard UI chain badge
+  now stays in sync with backend.
+  v1.1.3: Custom Monero node picker now fully functional — selecting a node writes config
+  and auto-restarts P2Pool to connect to it. Dashboard API syncs with active node config.
+  Thread slider fix: XMRig now sources /data/.env so slider changes take effect on restart.
+  Default chain changed to P2Pool mini for faster rewards. Dashboard container names fixed.
+  v1.1.0: Custom Monero node picker UI, chain selector (main/mini/nano), updated dashboard.
