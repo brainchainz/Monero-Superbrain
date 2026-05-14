@@ -13,7 +13,7 @@ services:
       - umbrel_main_network
 
   dashboard:
-    image: sirjamzalot/monero-superbrain-dashboard:v1.1
+    image: sirjamzalot/monero-superbrain-dashboard:v1.1.4
     container_name: monero_superbrain_dashboard
     restart: always
     environment:
@@ -26,7 +26,7 @@ services:
       - WALLET_ADDRESS=${WALLET_ADDRESS}
       - DEV_WALLET=${DEV_WALLET}
       - DEV_FEE_PERCENT=${DEV_FEE_PERCENT}
-      - P2POOL_CHAIN=${P2POOL_CHAIN:-mini}
+      - P2POOL_CHAIN=${P2POOL_CHAIN}
       - XMRIG_THREADS=${XMRIG_THREADS}
     networks:
       - default
@@ -44,47 +44,20 @@ services:
       - WALLET_ADDRESS=${WALLET_ADDRESS:-43sEimq64TtLoBaEzzxf7wVd4XcZPuGtNRP7zhT7WAgB3th9dvCrJMad99pZNKBRDmJXXXUxeZie7W5tsm7TWVrPHbxvins}
       - DEV_WALLET=${DEV_WALLET:-43sEimq64TtLoBaEzzxf7wVd4XcZPuGtNRP7zhT7WAgB3th9dvCrJMad99pZNKBRDmJXXXUxeZie7W5tsm7TWVrPHbxvins}
       - DEV_FEE_PERCENT=${DEV_FEE_PERCENT:-1}
-      - P2POOL_CHAIN=${P2POOL_CHAIN:-main}
+      - P2POOL_CHAIN=${P2POOL_CHAIN:-mini}
       - APP_MONERO_NODE_IP=${APP_MONERO_NODE_IP:-monero_monerod_1}
       - APP_MONERO_RPC_PORT=${APP_MONERO_RPC_PORT:-18081}
       - APP_MONERO_ZMQ_PORT=${APP_MONERO_ZMQ_PORT:-18083}
       - APP_MONERO_RPC_USER=${APP_MONERO_RPC_USER:-monero}
       - APP_MONERO_RPC_PASS=${APP_MONERO_RPC_PASS:-monero}
     entrypoint: /bin/sh
-    command: >
-      -c '
-        if [ -f /data/.env ]; then . /data/.env; fi
-        WALLET="${WALLET_ADDRESS}";
-        CHAIN="${P2POOL_CHAIN}";
-        DEV_ARGS="";
-        if [ -n "${DEV_WALLET}" ] && [ "${DEV_FEE_PERCENT}" -gt 0 ] && [ "$$WALLET" != "${DEV_WALLET}" ]; then
-          DEV_ARGS="--dev-wallet ${DEV_WALLET} --dev-fee-percent ${DEV_FEE_PERCENT}";
-        else
-          echo "[superbrain] dev fee: disabled";
-        fi;
-        CHAIN_ARG="";
-        if [ "$CHAIN" = "mini" ]; then CHAIN_ARG="--mini";
-        elif [ "$CHAIN" = "nano" ]; then CHAIN_ARG="--nano";
-        fi;
-        mkdir -p /data/api /data/cache /data/log;
-        exec p2pool
-          --wallet "$$WALLET"
-          --host "${APP_MONERO_NODE_IP:-monero_monerod_1}"
-          --rpc-port "${APP_MONERO_RPC_PORT:-18081}"
-          --zmq-port "${APP_MONERO_ZMQ_PORT:-18083}"
-          --rpc-login "${APP_MONERO_RPC_USER:-monero}:${APP_MONERO_RPC_PASS:-monero}"
-          --stratum 0.0.0.0:3333
-          --p2p 0.0.0.0:37889
-          --addpeers 65.21.227.114:37888,node.sethforprivacy.com:37888
-          --loglevel 3
-          --local-api --data-api /data/api
-          $$CHAIN_ARG $$DEV_ARGS
-      '
+    command: /data/scripts/start-p2pool.sh
     ports:
       - "3333:3333"
       - "37889:37889"
     volumes:
       - ${APP_DATA_DIR:-/data}:/data
+      - /home/umbrel/umbrel/app-data/monero:/monero-app:ro
     networks:
       - default
       - umbrel_main_network
@@ -95,14 +68,7 @@ services:
     restart: always
     depends_on:
       - p2pool
-    command: >
-      xmrig-proxy
-      -o p2pool:3333
-      -u SuperbrainProxy
-      -b 0.0.0.0:8888
-      --http-host 0.0.0.0
-      --http-port 8080
-      --http-access-token superbrain
+    command: xmrig-proxy -o p2pool:3333 -u SuperbrainProxy -b 0.0.0.0:8888 --http-host 0.0.0.0 --http-port 8080 --http-access-token superbrain
     ports:
       - "8888:8888"
     volumes:
@@ -117,30 +83,10 @@ services:
     privileged: true
     depends_on:
       - xmrig-proxy
+    environment:
+      - XMRIG_THREADS=${XMRIG_THREADS:-0}
     entrypoint: /bin/sh
-    command: >
-      -c '
-        THREADS="${XMRIG_THREADS:-0}";
-        echo 1280 > /proc/sys/vm/nr_hugepages 2>/dev/null;
-        echo 3 > /proc/sys/vm/nr_hugepages_mempolicy 2>/dev/null;
-        sleep 2;
-        THREAD_ARG="";
-        if [ "$$THREADS" != "0" ] && [ -n "$$THREADS" ]; then
-          THREAD_ARG="--threads $$THREADS";
-        fi;
-        echo "[superbrain] starting xmrig (threads: $${THREADS:-auto})";
-        exec xmrig
-          --config=/dev/null
-          -o xmrig-proxy:8888
-          -u "Superbrain Miner"
-          -p x
-          --coin monero
-          --donate-level 0
-          -k
-          --randomx-1gb-pages
-          --huge-pages-jit
-          $$THREAD_ARG
-      '
+    command: /data/scripts/start-xmrig.sh
     volumes:
       - ${APP_DATA_DIR:-/data}:/data
     networks:
