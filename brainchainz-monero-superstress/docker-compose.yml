@@ -106,6 +106,5 @@ services:
     - default
     - umbrel_main_network
 networks:
-  default: null
   umbrel_main_network:
     external: true
