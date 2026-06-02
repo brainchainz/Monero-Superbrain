@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.1.4"
+version: "1.2.0"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.2.0: Updated P2Pool to v4.15.1 — includes I2P support, improved sync
+  stability, new logging controls, memory leak fixes, and updated internal
+  dependencies (RandomX, curl, libuv, BoringSSL). Also fixes a rare P2P
+  sync bug and the "final reward" display issue in block templates.
   v1.1.4: Chain normalization fix — bare chain names from .env (mini/nano/main) are now
   correctly handled alongside p2pool-style flags (--mini/--nano/--main). Active chain detection
   uses p2pool process cmdline to avoid mainnet false positives. Dashboard UI chain badge
