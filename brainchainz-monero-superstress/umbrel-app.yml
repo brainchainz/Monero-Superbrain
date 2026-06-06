@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/icon.png
-version: "1.7.3"
+version: "1.7.4"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
