@@ -28,8 +28,8 @@ services:
     entrypoint:
       - monerod
     command: --testnet --non-interactive --rpc-bind-ip=0.0.0.0 --rpc-bind-port=28081
-      --confirm-external-bind --proxy=tor:9050 --proxy-allow-dns-leaks --tx-proxy=tor,tor:9050
-      --out-peers=32 --data-dir=/data --prune-blockchain --enable-dns-blocklist
+      --confirm-external-bind
+      --out-peers=32 --add-priority-node 71.31.209.128:28080 --add-priority-node 207.180.199.254:28080 --data-dir=/data --prune-blockchain --enable-dns-blocklist
       --no-igd --zmq-pub=tcp://0.0.0.0:28082
     volumes:
     - ${APP_DATA_DIR}/db:/data
