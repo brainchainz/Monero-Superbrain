@@ -29,6 +29,7 @@ services:
       - monerod
     command: --testnet --prune-blockchain --sync-pruned-blocks --block-sync-size=10
       --non-interactive --rpc-bind-ip=0.0.0.0 --rpc-bind-port=28081 --confirm-external-bind
+      --proxy=tor,10.99.10.10:9050
       --tx-proxy=tor,10.99.10.10:9050,disable_noise
       --out-peers=16 --in-peers=16 --data-dir=/data --no-igd
       --add-priority-node=71.31.209.128:28080
