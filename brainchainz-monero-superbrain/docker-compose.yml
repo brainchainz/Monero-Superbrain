@@ -37,7 +37,7 @@ services:
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
 
   p2pool:
-    image: sirjamzalot/superbrain-p2pool:v1.2
+    image: sirjamzalot/superbrain-p2pool:v1.3
     container_name: monero_superbrain_p2pool
     restart: always
     environment:
