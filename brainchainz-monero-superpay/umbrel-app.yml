@@ -3,7 +3,7 @@ id: brainchainz-monero-superpay
 category: finance
 name: Monero SuperPay
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
-version: "1.2.1"
+version: "1.3.0"
 tagline: Accept Monero payments with a full point-of-sale system
 description: >-
   Monero SuperPay is a self-hosted, trustless point-of-sale system for
@@ -35,13 +35,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.2.1: Store export/import (.superpay files) now carries all products, images, settings,
-  and wallet credentials for full cross-platform portability (Mac to Umbrel and back).
-  POS devices bypass Umbrel password — QR scan goes straight to the terminal.
-  Wallet file management (list, connect, delete) in Settings.
-  Tor .onion address auto-detected and shown in Settings.
-  Accurate wallet sync progress display.
-  Manual node picker (public, custom, Tor) alongside Umbrel's auto-configured node.
-  Order cancellation fix. Receipt print fix. PIN lock screen.
-  Security hardening: rate limiting, CSV injection prevention, WebSocket store filtering,
-  wallet overwrite protection.
+  v1.3.0: Themes. A new Appearance section in Settings lets you switch between
+  five themes (Glass, Classic, Carbon, Ocean, Fintech), remembered per device.
+  The default Glass theme is a crystal-glass look with a colorful animated mesh
+  glowing through frosted panels; Fintech is a clean soft-light theme. The whole
+  dashboard, point-of-sale, and device screens follow your chosen theme.
