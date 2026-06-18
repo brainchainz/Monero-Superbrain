@@ -1,10 +1,8 @@
 #!/bin/bash
 # MoneroSpace exports.sh
 
-: "${APP_DATA_DIR}:=${PWD}/data"
-: "${DEVICE_DOMAIN_NAME}:=umbrel.local"
-export APP_DATA_DIR
-export DEVICE_DOMAIN_NAME
+export APP_DATA_DIR="${APP_DATA_DIR:-$PWD/data}"
+export DEVICE_DOMAIN_NAME="${DEVICE_DOMAIN_NAME:-umbrel.local}"
 export APP_HOST="web"
 export APP_PORT="80"
 
