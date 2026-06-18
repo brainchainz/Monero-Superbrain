@@ -1,8 +1,8 @@
 #!/bin/bash
 # MoneroSpace exports.sh
 
-[ -z "$APP_DATA_DIR" ] && APP_DATA_DIR="$PWD/data"
-[ -z "$DEVICE_DOMAIN_NAME" ] && DEVICE_DOMAIN_NAME="umbrel.local"
+: "${APP_DATA_DIR}:=${PWD}/data"
+: "${DEVICE_DOMAIN_NAME}:=umbrel.local"
 export APP_DATA_DIR
 export DEVICE_DOMAIN_NAME
 export APP_HOST="web"
@@ -35,7 +35,7 @@ echo "MONEROD_RPC_TIMEOUT_MS=10000" >> "$APP_DATA_DIR/.env"
 echo "MONEROD_RPC_FALLBACK_URLS=" >> "$APP_DATA_DIR/.env"
 echo "MONERO_WALLET_RPC_URL=" >> "$APP_DATA_DIR/.env"
 echo "MONERO_WALLET_RPC_USER=" >> "$APP_DATA_DIR/.env"
-echo "MONERO_WALLET_RPC_PASSWORD=" >> "$APP_DATA_DIR/.env"
+echo "MONERO_WALLET_RPC_PASSWORD=$MONEROD_PASS" >> "$APP_DATA_DIR/.env"
 echo "XMR_POLL_MS=3000" >> "$APP_DATA_DIR/.env"
 
 echo "[monero-space] exports.sh complete"
