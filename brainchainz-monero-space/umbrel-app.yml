@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: brainchainz-monero-space
 category: crypto
 name: MoneroSpace
-version: "1.0.2"
+version: "1.0.3"
 tagline: Self-hosted Monero block explorer and mempool visualizer
 description: >-
   MoneroSpace is a self-hosted Monero block explorer and mempool visualizer
