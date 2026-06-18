@@ -11,7 +11,7 @@ services:
       - umbrel_main_network
 
   web:
-    image: sirjamzalot/monero-space:v1.0.6
+    image: sirjamzalot/monero-space:v1.0.7
     container_name: brainchainz_monero_space_web
     restart: always
     env_file:
