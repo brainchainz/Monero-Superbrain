@@ -20,11 +20,11 @@ port: 3008
 dependencies:
   - monero
 gallery:
-  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/1.png
-  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/2.png
-  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/3.png
-  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/4.png
-icon: https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/icon.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/4.png
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
