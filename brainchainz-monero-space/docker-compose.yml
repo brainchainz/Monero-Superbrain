@@ -1,0 +1,32 @@
+services:
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    container_name: brainchainz_monero_space_app_proxy
+    restart: on-failure
+    environment:
+      APP_HOST: brainchainz_monero_space_web
+      APP_PORT: 80
+    networks:
+      - default
+      - umbrel_main_network
+
+  web:
+    image: sirjamzalot/monero-space:v1.0.0
+    container_name: brainchainz_monero_space_web
+    restart: always
+    env_file:
+      - ${APP_DATA_DIR}/.env
+    volumes:
+      - ${APP_DATA_DIR}:/data
+    networks:
+      - default
+      - umbrel_main_network
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.99.30.0/24
+  umbrel_main_network:
+    external: true

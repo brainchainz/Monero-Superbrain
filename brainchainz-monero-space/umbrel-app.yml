@@ -1,0 +1,33 @@
+manifestVersion: 1.1
+id: brainchainz-monero-space
+category: crypto
+name: MoneroSpace
+version: "1.0.0"
+tagline: Self-hosted Monero block explorer and mempool visualizer
+description: >-
+  MoneroSpace is a self-hosted Monero block explorer and mempool visualizer
+  based on the mempool.space interface. It connects to your existing Umbrel
+  Monero node and surfaces public chain data — blocks, transactions, fees, and
+  mempool statistics — while respecting RingCT privacy.
+
+  No wallet data ever leaves your node. Private view keys and transaction
+  secrets stay in your browser for optional payment verification.
+developer: brainchainz
+website: https://github.com/n0/monerospace-org
+repo: https://github.com/n0/monerospace-org
+support: https://github.com/n0/monerospace-org/issues
+port: 3008
+dependencies:
+  - monero
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/gallery/4.png
+icon: https://raw.githubusercontent.com/brainchainz/monero-superbrain/main/brainchainz-monero-space/icon.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  v1.0.0: Initial release. Self-hosted MoneroSpace explorer connecting to the
+  Umbrel Monero node with HTTP Digest authentication.
