@@ -7,8 +7,8 @@ tagline: Self-hosted Monero block explorer and mempool visualizer
 description: >-
   MoneroSpace is a self-hosted Monero block explorer and mempool visualizer
   based on the mempool.space interface. It connects to your existing Umbrel
-  Monero node and surfaces public chain data — blocks, transactions, fees, and
-  mempool statistics — while respecting RingCT privacy.
+  Monero node and surfaces public chain data - blocks, transactions, fees, and
+  mempool statistics - while respecting RingCT privacy.
 
   No wallet data ever leaves your node. Private view keys and transaction
   secrets stay in your browser for optional payment verification.
