@@ -1,0 +1,33 @@
+manifestVersion: 1.1
+id: brainchainz-monero-superatomic
+category: finance
+name: Monero SuperAtomic
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
+version: "0.4.0"
+tagline: Run an Automated Swap Backend to provide XMR liquidity
+description: >-
+  Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
+  swaps. It lets you provide Monero liquidity to the Eigen network from your
+  Umbrel, with a built-in web dashboard for funding, swap tracking, balances,
+  BTC withdrawals, peer connectivity, logs, and wallet seed backup.
+
+  This package wraps the patched Eigen ASB 4.11.3 and connects to your existing
+  Umbrel Monero node and Electrs server.
+developer: brainchainz
+website: https://eigenwallet.org
+dependencies:
+  - monero
+  - electrs
+repo: https://github.com/brainchainz/Monero-Superbrain
+support: https://github.com/brainchainz/Monero-Superbrain/issues
+port: 8085
+gallery: []
+path: ""
+defaultPassword: null
+torOnly: false
+releaseNotes: >-
+  Renamed to Monero SuperAtomic. Clearnet is now off by default (Tor-only) for
+  privacy, with an opt-in toggle. Spread and developer tip are shown as plain
+  percentages, and the Monero balance shows Available and Pending separately.
+  Includes the reliable Monero node connection (digest-auth proxy) and the new
+  app icon.

@@ -1,0 +1,56 @@
+services:
+  # Umbrel App Proxy (handles auth and Tor for the dashboard)
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    container_name: brainchainz_monero_superatomic_app_proxy
+    restart: on-failure
+    environment:
+      - APP_HOST=brainchainz_monero_superatomic_server
+      - APP_PORT=8080
+      - LOG_LEVEL=debug
+    networks:
+      - default
+      - umbrel_main_network
+
+  # Monero SuperAtomic: Eigen ASB + dashboard (ASB, Node/Express API, React UI,
+  # nginx, supervisord) in one container.
+  server:
+    image: sirjamzalot/monero-superatomic:0.4.0
+    container_name: brainchainz_monero_superatomic_server
+    restart: unless-stopped
+    # ASB peer-to-peer swap port, published to the host for inbound peers
+    ports:
+      - "9939:9939"
+    expose:
+      - "8080"
+    environment:
+      - ASB_DATA_DIR=/data
+      - ASB_CONFIG_PATH=/data/config.toml
+      - ASB_RPC_URL=http://127.0.0.1:9944
+      - ASB_RPC_PASSWORD_FILE=/data/rpc-password
+      - ASB_DASHBOARD_PASSWORD_HASH_FILE=/data/dashboard-password-hash
+      - ASB_JWT_SECRET_FILE=/data/jwt-secret
+      - PORT=8081
+      # Monero digest-auth proxy (scripts/monero-proxy.mjs). Reaches the node by
+      # DNS name over umbrel_main_network and injects the node's RPC auth.
+      - MONERO_PROXY_PORT=18090
+      - MONERO_NODE_IP=monero_monerod_1
+      - MONERO_RPC_PORT=${APP_MONERO_RPC_PORT:-18081}
+      - MONERO_RPC_USER=${APP_MONERO_RPC_USER:-monero}
+      - MONERO_RPC_PASS=${APP_MONERO_RPC_PASS:-monero}
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    networks:
+      # default: reach the app proxy. umbrel_main_network: reach the
+      # Monero node (monero_monerod_1) and Electrs (electrs_electrs_1).
+      - default
+      - umbrel_main_network
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.99.40.0/24
+  umbrel_main_network:
+    external: true
