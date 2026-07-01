@@ -15,7 +15,7 @@ services:
   # Monero SuperAtomic: Eigen ASB + dashboard (ASB, Node/Express API, React UI,
   # nginx, supervisord) in one container.
   server:
-    image: sirjamzalot/monero-superatomic:0.4.1
+    image: sirjamzalot/monero-superatomic:0.4.2
     container_name: brainchainz_monero_superatomic_server
     restart: unless-stopped
     # ASB peer-to-peer swap port, published to the host for inbound peers

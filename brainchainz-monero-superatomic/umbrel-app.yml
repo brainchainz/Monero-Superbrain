@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.1"
+version: "0.4.2"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -17,6 +17,7 @@ developer: brainchainz
 website: https://eigenwallet.org
 dependencies:
   - monero
+  - bitcoin
   - electrs
 repo: https://github.com/brainchainz/Monero-Superbrain
 support: https://github.com/brainchainz/Monero-Superbrain/issues
@@ -26,7 +27,7 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Adds a Liquidity Planner (see BTC earned at a given spread from your XMR
-  balance) and a full Backup tab: one-click, optionally encrypted archive of the
-  seed, the separate Monero wallet, the swap database (to recover stuck swaps),
-  the Bitcoin wallet, and the Tor onion key.
+  Fixes quoting (the maker can now offer swaps): the Monero auth proxy no longer
+  drops the pool's requests under concurrent load. Swaps now show on the Overview
+  page, you can change your dashboard password, and there is a subtle swap
+  animation. Adds Bitcoin as a dependency.
