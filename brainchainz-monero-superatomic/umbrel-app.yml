@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.2"
+version: "0.4.3"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
