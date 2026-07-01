@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.0"
+version: "0.4.1"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -26,8 +26,7 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Renamed to Monero SuperAtomic. Clearnet is now off by default (Tor-only) for
-  privacy, with an opt-in toggle. Spread and developer tip are shown as plain
-  percentages, and the Monero balance shows Available and Pending separately.
-  Includes the reliable Monero node connection (digest-auth proxy) and the new
-  app icon.
+  Adds a Liquidity Planner (see BTC earned at a given spread from your XMR
+  balance) and a full Backup tab: one-click, optionally encrypted archive of the
+  seed, the separate Monero wallet, the swap database (to recover stuck swaps),
+  the Bitcoin wallet, and the Tor onion key.
