@@ -4,14 +4,13 @@ Community app store for [Umbrel OS](https://umbrel.com) featuring Monero-powered
 
 ## Apps
 
-### Monero Superbrain
-Decentralized Monero mining with P2Pool, XMRig, XMRig-proxy, and a web dashboard.
-Connect your own miners over LAN or Tailscale. Beautiful themes, earnings tracker, and fleet management.
-
-### Monero SuperPay
-Self-hosted point-of-sale system for accepting Monero (XMR) payments.
-Product catalog, shopping cart, multi-device PoS, order tracking, and sales analytics.
-View-only wallet — your spend keys never leave your device.
+| | App | Description |
+|---|---|---|
+| <img src="https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png" width="52"> | **Monero Superbrain** | Decentralized Monero mining with P2Pool, XMRig, and a web dashboard. Connect your own miners over LAN or Tailscale, with themes, an earnings tracker, and fleet management. |
+| <img src="https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png" width="52"> | **Monero SuperPay** | Self-hosted Monero point-of-sale. Product catalog, shopping cart, multi-device checkout, order tracking, and sales analytics. View-only wallet, so your spend keys never leave your device. |
+| <img src="https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/icon.png" width="52"> | **MoneroSpace** | Self-hosted Monero block explorer and mempool visualizer based on the mempool.space interface. Reads public chain data from your node, and no wallet data ever leaves it. |
+| <img src="https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/icon.png" width="52"> | **Monero Superstress** | Run a full Monero FCMP++ stressnet node routed entirely through Tor. Includes a wallet lab for creating wallets, sending test transactions, and stress-testing the next privacy upgrade. |
+| <img src="https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png" width="52"> | **Monero SuperAtomic** | Automated Swap Backend for XMR/BTC atomic swaps. Provide Monero liquidity to the Eigen network, with a dashboard for funding, swaps, balances, withdrawals, and encrypted backup and restore. |
 
 ## Install
 
@@ -20,7 +19,7 @@ View-only wallet — your spend keys never leave your device.
 3. Click **Add** and paste: `https://github.com/brainchainz/Monero-Superbrain`
 4. Browse and install apps from the **Brainchainz** store
 
-Both apps require the official **Monero** app to be installed first.
+Every app connects to the official **Monero** app, so install that first. MoneroSpace and Monero SuperAtomic also use **Bitcoin** and **Electrs** (SuperAtomic requires them).
 
 ## Connecting External Miners (Superbrain)
 
@@ -38,4 +37,4 @@ Open an issue: [github.com/brainchainz/Monero-Superbrain/issues](https://github.
 
 ---
 
-*Beta — feedback welcome.*
+*Beta, feedback welcome.*
