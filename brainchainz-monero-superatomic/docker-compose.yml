@@ -5,10 +5,7 @@ services:
     container_name: brainchainz_monero_superatomic_app_proxy
     restart: on-failure
     environment:
-      # Pinned IP, not the container name: the DNS name also resolves on
-      # umbrel_main_network, and nginx only accepts connections from the
-      # private 10.99.40.0/24 subnet. The IP forces the proxy over it.
-      - APP_HOST=10.99.40.10
+      - APP_HOST=brainchainz_monero_superatomic_server
       - APP_PORT=8080
       - LOG_LEVEL=debug
     networks:
@@ -44,12 +41,11 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     networks:
-      # default: reach the app proxy (fixed IP so APP_HOST routes over this
-      # private subnet, which is the only one nginx accepts). umbrel_main_network:
-      # reach the Monero node (monero_monerod_1) and Electrs (electrs_electrs_1).
-      default:
-        ipv4_address: 10.99.40.10
-      umbrel_main_network: {}
+      # NOTE: Umbrel's compose overlay maps "default" onto the shared
+      # umbrel_main_network, so all containers effectively live there. That
+      # network reaches the Monero node (monero_monerod_1) and Electrs.
+      - default
+      - umbrel_main_network
 
 networks:
   default:
