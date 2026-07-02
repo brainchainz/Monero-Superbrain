@@ -21,7 +21,13 @@ dependencies:
 repo: https://github.com/brainchainz/Monero-Superbrain
 support: https://github.com/brainchainz/Monero-Superbrain/issues
 port: 8085
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/4.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/5.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/6.png
 path: ""
 defaultPassword: null
 torOnly: false

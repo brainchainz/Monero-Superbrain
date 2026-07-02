@@ -31,6 +31,14 @@ xmrig -o umbrel.local:8888 -u "Rig Name" -p x
 
 Check the Mining Fleet tab in the dashboard for full instructions.
 
+## Source and Licensing
+
+Monero SuperAtomic's swap engine is a GPLv3 fork of
+[eigenwallet/core](https://github.com/eigenwallet/core). The complete corresponding
+source of the modified engine shipped in the app's Docker images is published at
+[github.com/brainchainz/eigenwallet-core](https://github.com/brainchainz/eigenwallet-core),
+including every patch and the CI workflow that builds the exact binaries.
+
 ## Support
 
 Open an issue: [github.com/brainchainz/Monero-Superbrain/issues](https://github.com/brainchainz/Monero-Superbrain/issues)
