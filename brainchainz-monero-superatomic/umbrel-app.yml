@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.4"
+version: "0.4.5"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -26,7 +26,11 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Adds a Restore tab so you can rebuild the whole node (Monero wallet, Bitcoin
-  wallet, identity, and swap database) from an encrypted backup. Adds a How-To
-  guide and a one-click "Apply to Config" button in the Liquidity Planner. Fixes
-  a bug where the Config form reset while you were typing.
+  Updates the swap engine to Eigen ASB 4.11.4 and fixes a proxy bug that made
+  every other quote fail (takers sometimes saw "no funds available"). Adds block
+  explorer buttons next to every transaction id (opens your Umbrel's mempool and
+  MoneroSpace apps, configurable), a Bitcoin activity list, restore of large
+  backups, a How-To guide, and full copyable transaction ids. Withdrawals now
+  require the dashboard password. Deposits show faster, fonts are bundled for
+  privacy, logs no longer grow unbounded, and Save and Restart in Config now
+  actually restarts the ASB.
