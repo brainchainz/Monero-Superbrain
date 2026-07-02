@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.6"
+version: "0.4.7"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -26,9 +26,7 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Adds Monero withdrawals: send or sweep XMR from the maker wallet straight to
-  an external wallet (password confirmed, refused while a swap is in flight),
-  useful for taking profits or as a fast exit to cold storage. Adds a Monero
-  activity list showing wallet deposits and withdrawals with block explorer
-  links. Transaction ids across the app open in your Umbrel's MoneroSpace and
-  mempool apps.
+  Shows your balances at the top of the Withdraw tab so you can see what is
+  available without switching pages. The developer tip field now reflects the
+  1% minimum the maker binary enforces, instead of accepting values it would
+  silently override.
