@@ -1,0 +1,8 @@
+# Superbrain Tor SOCKS proxy
+# Provides private outbound access to the p2pool.observer .onion mirrors so the
+# dashboard can sync payouts and shares without leaking the Umbrel's public IP.
+SocksPort 0.0.0.0:9050
+SocksPolicy accept 10.99.99.0/24
+SocksPolicy reject *
+Log notice stderr
+DataDirectory /tmp/tor

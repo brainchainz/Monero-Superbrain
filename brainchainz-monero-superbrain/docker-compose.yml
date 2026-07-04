@@ -28,6 +28,11 @@ services:
       - DEV_FEE_PERCENT=${DEV_FEE_PERCENT}
       - P2POOL_CHAIN=${P2POOL_CHAIN}
       - XMRIG_THREADS=${XMRIG_THREADS}
+      # Route p2pool.observer lookups (payouts + shares) through the Tor
+      # sidecar so the Umbrel's public IP is never exposed to the observer.
+      # Umbrel home servers have no VPN; clearnet stays opt-in only.
+      - TOR_PROXY_URL=socks5h://10.99.99.10:9050
+      - OBSERVER_ALLOW_CLEARNET=${OBSERVER_ALLOW_CLEARNET:-false}
     networks:
       - default
       - umbrel_main_network
@@ -35,6 +40,21 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${APP_DATA_DIR:-/data}:/data
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
+
+  # Tor SOCKS proxy for private observer API access (no VPN on Umbrel).
+  tor:
+    image: getumbrel/tor:0.4.7.8
+    container_name: monero_superbrain_tor
+    restart: on-failure
+    volumes:
+      - ${APP_DATA_DIR:-/data}/tor:/tmp/tor
+      - ${APP_DATA_DIR:-/data}/torrc:/etc/tor/torrc:ro
+    command:
+      - -f
+      - /etc/tor/torrc
+    networks:
+      default:
+        ipv4_address: 10.99.99.10
 
   p2pool:
     image: sirjamzalot/superbrain-p2pool:v1.3
