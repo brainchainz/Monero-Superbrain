@@ -13,7 +13,7 @@ services:
       - umbrel_main_network
 
   dashboard:
-    image: sirjamzalot/monero-superbrain-dashboard:v1.1.4
+    image: sirjamzalot/monero-superbrain-dashboard:v1.4.0
     container_name: monero_superbrain_dashboard
     restart: always
     environment:
@@ -57,7 +57,7 @@ services:
         ipv4_address: 10.99.99.10
 
   p2pool:
-    image: sirjamzalot/superbrain-p2pool:v1.3
+    image: sirjamzalot/superbrain-p2pool:v1.4.0
     container_name: monero_superbrain_p2pool
     restart: always
     environment:
