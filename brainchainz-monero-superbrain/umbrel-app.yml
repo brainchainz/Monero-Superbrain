@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.4.0"
+version: "1.4.1"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.4.1: Fixes the Tor sidecar networking so the v1.4.0 update applies cleanly
+  (the tor container now joins the app network the standard way instead of using
+  a fixed address). Same features as v1.4.0.
   v1.4.0: Two new immersive Matrix themes, MTRX and NURO, with community art by
   @connorxmr, plus a serious visual overhaul: glass panels with depth, cleaner
   typography, and refined status cards. New chain-aware "Open Payouts" button

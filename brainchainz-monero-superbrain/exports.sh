@@ -52,7 +52,9 @@ if [ ! -f "${APP_DATA_DIR}/torrc" ]; then
     cat > "${APP_DATA_DIR}/torrc" << 'ENDTORRC'
 # Superbrain Tor SOCKS proxy for private p2pool.observer access
 SocksPort 0.0.0.0:9050
-SocksPolicy accept 10.99.99.0/24
+SocksPolicy accept 10.0.0.0/8
+SocksPolicy accept 172.16.0.0/12
+SocksPolicy accept 192.168.0.0/16
 SocksPolicy reject *
 Log notice stderr
 DataDirectory /tmp/tor
