@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.4.1"
+version: "1.4.2"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.4.2: Replaces the Tor proxy with a current, self-updating build so it can
+  reach the Tor network again (the previous Tor image was abandoned in 2022 and
+  could no longer bootstrap, so observer lookups fell back to being skipped).
+  Observer payouts/shares now sync over Tor as intended. Same features as v1.4.0.
   v1.4.1: Fixes the Tor sidecar networking so the v1.4.0 update applies cleanly
   (the tor container now joins the app network the standard way instead of using
   a fixed address). Same features as v1.4.0.

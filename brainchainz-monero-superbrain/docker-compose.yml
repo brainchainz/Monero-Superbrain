@@ -42,19 +42,14 @@ services:
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
 
   # Tor SOCKS proxy for private observer API access (no VPN on Umbrel).
-  # Joins the default network like every other service (list form, no static IP)
-  # so it does not conflict with Umbrel's network patching; the dashboard reaches
-  # it by container DNS name (see TOR_PROXY_URL).
+  # Custom current Tor (alpine-based, multi-arch); getumbrel/tor is abandoned
+  # since 2022 and no longer bootstraps. Self-contained: SOCKS on 9050 baked in,
+  # no mounts. Joins the default network list-form (no static IP) so it does not
+  # conflict with Umbrel's network patching; the dashboard reaches it by DNS name.
   tor:
-    image: getumbrel/tor:0.4.7.8
+    image: sirjamzalot/superbrain-tor:v1.4.2
     container_name: monero_superbrain_tor
     restart: on-failure
-    volumes:
-      - ${APP_DATA_DIR:-/data}/tor:/tmp/tor
-      - ${APP_DATA_DIR:-/data}/torrc:/etc/tor/torrc:ro
-    command:
-      - -f
-      - /etc/tor/torrc
     networks:
       - default
 

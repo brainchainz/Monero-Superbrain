@@ -43,24 +43,6 @@ export APP_MONERO_RPC_PASS="${APP_MONERO_RPC_PASS:-monero}"
 export APP_DATA_DIR="${APP_DATA_DIR:-$PWD/data}"
 export DEVICE_DOMAIN_NAME="${DEVICE_DOMAIN_NAME:-umbrel.local}"
 
-# -- Tor sidecar data dir + config --
-# The tor container mounts ${APP_DATA_DIR}/tor as its DataDirectory and
-# ${APP_DATA_DIR}/torrc as its config. Ensure both exist before compose up so
-# Docker never auto-creates a directory where the torrc file should be.
-mkdir -p "${APP_DATA_DIR}/tor"
-if [ ! -f "${APP_DATA_DIR}/torrc" ]; then
-    cat > "${APP_DATA_DIR}/torrc" << 'ENDTORRC'
-# Superbrain Tor SOCKS proxy for private p2pool.observer access
-SocksPort 0.0.0.0:9050
-SocksPolicy accept 10.0.0.0/8
-SocksPolicy accept 172.16.0.0/12
-SocksPolicy accept 192.168.0.0/16
-SocksPolicy reject *
-Log notice stderr
-DataDirectory /tmp/tor
-ENDTORRC
-fi
-
 # -- Generate container startup scripts --
 # Written to the data volume so containers can run them directly.
 # This avoids all YAML escaping issues in docker-compose.yml.
