@@ -3,12 +3,12 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/icon.png
-version: "1.8.0"
+version: "1.8.1"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
   through Tor. FCMP++ (Full-Chain Membership Proofs) is the upcoming privacy
-  upgrade that eliminates ring signature limitations — this stressnet lets you
+  upgrade that eliminates ring signature limitations. This stressnet lets you
   test it before mainnet launch.
 
 
@@ -21,6 +21,13 @@ description: >-
   All traffic is routed through Tor — zero clearnet connections. Your IP is
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
+releaseNotes: >-
+  v1.8.1: Fixes the app so it runs again. The web and explorer-relay images are
+  now multi-arch (amd64 + arm64), the web image was arm64-only and would not
+  start on amd64 Umbrels. Replaced the abandoned Tor proxy with a current build
+  that actually connects (the old one could no longer bootstrap, which stalled
+  the node's Tor-routed sync). Pinned all image versions. Also: block explorer
+  pagination, cleaner spammer wallet flow, and fresh-install permission fixes.
 developer: brainchainz
 website: https://github.com/brainchainz/monero-superstress
 repo: https://github.com/brainchainz/monero-superstress
