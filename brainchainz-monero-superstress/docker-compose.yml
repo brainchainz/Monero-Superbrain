@@ -98,7 +98,7 @@ services:
       stressnet:
         ipv4_address: 10.99.10.14
   web:
-    image: sirjamzalot/monero-stressnet-web:v1.8.1
+    image: sirjamzalot/monero-stressnet-web:v1.8.2
     container_name: brainchainz_monero_superstress_web
     restart: on-failure
     environment:

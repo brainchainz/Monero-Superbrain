@@ -27,7 +27,11 @@ releaseNotes: >-
   before the daemon's timeout, so it banned every peer as "too slow" and the
   chain stayed stuck tens of thousands of blocks behind. Sync now requests one
   block at a time, which completes over Tor and lets the node steadily catch up
-  (first sync is slow but reliable; steady-state tip-following is quick).
+  (first sync is slow but reliable; steady-state tip-following is quick). Also
+  fixes the dashboard sync meter, which showed "Synchronized" while the node was
+  still tens of thousands of blocks behind: it now judges sync on actual blocks
+  behind the highest known network tip, and shows "Searching for peers" during
+  Tor peer gaps instead of a false 100%.
   v1.8.1: Fixes the app so it runs again. The web and explorer-relay images are
   now multi-arch (amd64 + arm64), the web image was arm64-only and would not
   start on amd64 Umbrels. Replaced the abandoned Tor proxy with a current build
