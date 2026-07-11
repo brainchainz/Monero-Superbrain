@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/icon.png
-version: "1.8.1"
+version: "1.8.2"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
@@ -22,6 +22,12 @@ description: >-
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-
+  v1.8.2: Fixes Tor-only sync. The node routes all peer traffic through Tor, and
+  the previous block-batch size was too large to transfer through a Tor circuit
+  before the daemon's timeout, so it banned every peer as "too slow" and the
+  chain stayed stuck tens of thousands of blocks behind. Sync now requests one
+  block at a time, which completes over Tor and lets the node steadily catch up
+  (first sync is slow but reliable; steady-state tip-following is quick).
   v1.8.1: Fixes the app so it runs again. The web and explorer-relay images are
   now multi-arch (amd64 + arm64), the web image was arm64-only and would not
   start on amd64 Umbrels. Replaced the abandoned Tor proxy with a current build

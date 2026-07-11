@@ -25,7 +25,13 @@ services:
     restart: on-failure
     entrypoint:
       - monerod
-    command: --testnet --prune-blockchain --sync-pruned-blocks --block-sync-size=10
+    # block-sync-size=1 is REQUIRED for Tor-only sync. All P2P goes through the
+    # single Tor SOCKS circuit (--proxy). Larger batches can't be delivered
+    # within monerod's span window, so it bans every peer as "too slow" and the
+    # node never advances (was stuck 23k blocks behind). One block per request
+    # completes over Tor before the ban timer, so the chain crawls forward. Slow
+    # on first sync but reliable; do not raise this while Tor-only.
+    command: --testnet --prune-blockchain --sync-pruned-blocks --block-sync-size=1
       --non-interactive --rpc-bind-ip=0.0.0.0 --rpc-bind-port=28081 --confirm-external-bind
       --proxy=10.99.10.10:9050
       --tx-proxy=tor,10.99.10.10:9050,disable_noise
@@ -34,6 +40,8 @@ services:
       --add-priority-node=207.180.199.254:28080
       --add-priority-node=50.27.93.192:28080
       --add-priority-node=70.179.160.204:28080
+      --add-priority-node=116.203.98.127:28080
+      --add-priority-node=148.63.215.132:28080
     volumes:
     - ${APP_DATA_DIR}/db:/data
     depends_on:
