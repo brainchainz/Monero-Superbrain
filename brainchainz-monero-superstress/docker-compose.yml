@@ -8,12 +8,13 @@ services:
     - APP_PORT=4050
     networks:
     - umbrel_main_network
-  # Current, multi-arch Tor (alpine-based, SOCKS 9050 baked in). Replaces the
-  # abandoned getumbrel/tor:0.4.7.8 (2022) which no longer bootstraps in 2026.
+  # Multi-arch Tor sidecar tuned for monerod P2P sync over Tor: SocksTimeout 15
+  # (fail bad exits fast) + MaxCircuitDirtiness 86400 (stick to exits that
+  # allow port 28080). Source: tor/ in the monero-superstress repo.
   # Self-contained: no torrc mount, no command. Static IP is safe here because
   # it lives on the dedicated stressnet subnet, not the shared Umbrel network.
   tor:
-    image: sirjamzalot/superbrain-tor:v1.4.2
+    image: sirjamzalot/superstress-tor:v1.0
     container_name: brainchainz_monero_superstress_tor
     restart: on-failure
     networks:
@@ -35,13 +36,10 @@ services:
       --non-interactive --rpc-bind-ip=0.0.0.0 --rpc-bind-port=28081 --confirm-external-bind
       --proxy=10.99.10.10:9050
       --tx-proxy=tor,10.99.10.10:9050,disable_noise
-      --out-peers=16 --in-peers=16 --data-dir=/data --no-igd
-      --add-priority-node=71.31.209.128:28080
-      --add-priority-node=207.180.199.254:28080
-      --add-priority-node=50.27.93.192:28080
-      --add-priority-node=70.179.160.204:28080
-      --add-priority-node=116.203.98.127:28080
-      --add-priority-node=148.63.215.132:28080
+      --out-peers=3 --in-peers=8 --data-dir=/data --no-igd
+      --add-exclusive-node=207.180.199.254:28080
+      --add-exclusive-node=148.63.215.132:28080
+      --add-exclusive-node=116.203.98.127:28080
     volumes:
     - ${APP_DATA_DIR}/db:/data
     depends_on:
