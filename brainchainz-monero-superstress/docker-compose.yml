@@ -96,7 +96,7 @@ services:
       stressnet:
         ipv4_address: 10.99.10.14
   web:
-    image: sirjamzalot/monero-stressnet-web:v1.8.4
+    image: sirjamzalot/monero-stressnet-web:v1.8.5
     container_name: brainchainz_monero_superstress_web
     restart: on-failure
     environment:
@@ -104,11 +104,16 @@ services:
     - MONEROD_RPC=http://10.99.10.11:28081
     - WALLET_RPC=http://10.99.10.12:28083
     - SPAMMER_WALLET_RPC=http://10.99.10.13:28084
+    - SPAMMER_WALLET_DIR=/spammer-wallets
     - MONITOR_DB_PATH=/data/monitor.db
     - RELAY_RPC=http://10.99.10.14:3001
     volumes:
     - ${APP_DATA_DIR}/monitor:/data
     - ${APP_DATA_DIR}/wallet:/wallet-files
+    # Read-only view of the spammer wallet dir so the web backend can tell
+    # whether a wallet file exists (otherwise every restart offered "Create",
+    # which then failed with "file already exists").
+    - ${APP_DATA_DIR}/spammer-wallet:/spammer-wallets:ro
     - /var/run/docker.sock:/var/run/docker.sock
     - ${APP_DATA_DIR}/db:/data/db:ro
     depends_on:

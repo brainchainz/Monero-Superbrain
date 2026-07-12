@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/icon.png
-version: "1.8.4"
+version: "1.8.5"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
@@ -22,6 +22,17 @@ description: >-
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-
+  v1.8.5: Spammer wallet overhaul, aligned with the latest upstream xmrspammer
+  design. The spam loop now sweeps leaf accounts round-robin (self-churn)
+  instead of self-sending a fixed amount that exceeded each leaf's balance, so
+  spam transactions actually broadcast. The spammer log panel works (it was
+  wired to a field that never existed), the wallet auto-resumes after a
+  restart instead of dead-ending on "create" for a wallet that already exists,
+  and tree building now funds up to 15 leaves per transaction with automatic
+  waits for change to unlock, with live progress in the UI. Wallet state is
+  saved to disk periodically and on stop, the UI shows wallet sync status and
+  blocks the spam loop until the wallet is ready, and recovery tools (flush
+  txpool, rescan) talk to the right daemon address again.
   v1.8.4: Network Monitor overhaul. New Sync Health section shows the metrics
   that actually decide whether a Tor-only node converges: blocks behind, sync
   rate vs tip growth, peer uptime, catch-up ETA, and a peer-ban timeline.
