@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/icon.png
-version: "1.8.3"
+version: "1.8.4"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
@@ -22,6 +22,14 @@ description: >-
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-
+  v1.8.4: Network Monitor overhaul. New Sync Health section shows the metrics
+  that actually decide whether a Tor-only node converges: blocks behind, sync
+  rate vs tip growth, peer uptime, catch-up ETA, and a peer-ban timeline.
+  Fixes the Block Weight and Block Reward charts, which had recorded zeros
+  since launch (the daemon's last-block RPC returns empty fields on this
+  FCMP++ build, so the monitor now fetches the top block by height). Wide
+  time windows are now downsampled server-side so week/all charts render
+  fast, and monitor data older than 30 days is pruned automatically.
   v1.8.3: Makes Tor-only sync actually converge. The node now connects
   exclusively to the stressnet's live nodes instead of burning Tor circuits on
   dozens of long-dead peers from the stored peerlist, and ships a tuned Tor
