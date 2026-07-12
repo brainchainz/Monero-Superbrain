@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/icon.png
-version: "1.8.5"
+version: "1.8.6"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
@@ -22,6 +22,12 @@ description: >-
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-
+  v1.8.6: Wallet tab fixup. Adds a Rescan control: a fast "Rescan" that
+  re-checks which outputs are spent (fixes a stuck balance) and a "Full Rescan"
+  that re-reads the chain and rebuilds history, both run in the background so
+  the UI stays responsive. Adds a Max button to the send form that fills your
+  unlocked balance minus a fee reserve, and removes a decorative disabled
+  field. Wallet actions are disabled while a rescan or other job is running.
   v1.8.5: Spammer wallet overhaul, aligned with the latest upstream xmrspammer
   design. The spam loop now sweeps leaf accounts round-robin (self-churn)
   instead of self-sending a fixed amount that exceeded each leaf's balance, so
