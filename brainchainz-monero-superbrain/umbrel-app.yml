@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
-icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superbrain/icon.png
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
 version: "1.4.3"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
@@ -17,10 +17,10 @@ port: 3000
 dependencies:
   - monero
 gallery:
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superbrain/gallery/1.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superbrain/gallery/2.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superbrain/gallery/3.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superbrain/gallery/4.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/gallery/4.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

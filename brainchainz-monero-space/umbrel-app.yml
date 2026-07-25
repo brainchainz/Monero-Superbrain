@@ -20,11 +20,11 @@ port: 3008
 dependencies:
   - monero
 gallery:
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-space/gallery/1.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-space/gallery/2.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-space/gallery/3.png
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-space/gallery/4.png
-icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-space/icon.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/3.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/gallery/4.png
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-space/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

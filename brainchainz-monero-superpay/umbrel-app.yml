@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: brainchainz-monero-superpay
 category: finance
 name: Monero SuperPay
-icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superpay/icon.png
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
 version: "1.3.0"
 tagline: Accept Monero payments with a full point-of-sale system
 description: >-

@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
-icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/icon.png
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/icon.png
 version: "1.8.6"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
@@ -78,11 +78,11 @@ support: https://github.com/brainchainz/monero-superstress/issues
 port: 4050
 dependencies: []
 gallery:
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/gallery/1.jpeg
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/gallery/2.jpeg
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/gallery/3.jpeg
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/gallery/4.jpeg
-  - http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superstress/gallery/5.jpeg
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/gallery/1.jpeg
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/gallery/2.jpeg
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/gallery/3.jpeg
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/gallery/4.jpeg
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/gallery/5.jpeg
 path: ""
 defaultUsername: ""
 defaultPassword: ""
