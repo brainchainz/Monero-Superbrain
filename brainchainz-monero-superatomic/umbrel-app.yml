@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: http://umbrel.local:8101/brainchainz/monero-superbrain/raw/branch/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.9"
+version: "0.4.10"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -32,8 +32,10 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Updates the swap engine to Eigen ASB 4.13.2, which fixes bugs in the swap
-  setup protocol and in Bitcoin output selection. Adds a Hide button that masks
-  every identifying value (addresses, peer id, transaction ids, seeds, balances,
-  and swap amounts) for screenshots and screen sharing, the XMR/BTC market rate
-  in the top bar, and the current spread in the offer panel.
+  Fixes a blank dashboard after updating: the browser could keep a cached page
+  that pointed at script files the new version no longer contains, and the
+  server answered those with the page itself instead of a not-found. Also
+  updates the swap engine to Eigen ASB 4.13.2 (fixes in swap setup and Bitcoin
+  output selection), adds a Hide button that masks every identifying value for
+  screenshots, the XMR/BTC market rate in the top bar, and the current spread in
+  the offer panel.
