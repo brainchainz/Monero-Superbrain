@@ -2,8 +2,8 @@ manifestVersion: 1.1
 id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
-icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.10"
+icon: icon.png
+version: "0.4.11"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -28,14 +28,16 @@ gallery:
   - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/4.png
   - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/5.png
   - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/6.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/gallery/7.png
 path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
-  Fixes a blank dashboard after updating: the browser could keep a cached page
-  that pointed at script files the new version no longer contains, and the
-  server answered those with the page itself instead of a not-found. Also
-  updates the swap engine to Eigen ASB 4.13.2 (fixes in swap setup and Bitcoin
-  output selection), adds a Hide button that masks every identifying value for
-  screenshots, the XMR/BTC market rate in the top bar, and the current spread in
-  the offer panel.
+  Privacy mode now masks swap and transaction timestamps as well. The swap and
+  activity lists already hid amounts, addresses, and transaction ids, but the
+  date and time of each entry can be correlated against the public blockchains
+  to identify your activity, so they are hidden with everything else. Updating
+  is also smoother: the dashboard no longer needs a hard refresh after an
+  update, because a page cached from an earlier version now loads the current
+  app instead of showing a blank screen. Config gains a Swap Engine section
+  reporting the ASB version the app is running.
