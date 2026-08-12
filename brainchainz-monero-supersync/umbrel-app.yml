@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.1.0"
+version: "0.1.1"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -41,10 +41,15 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v0.1.0: First preview. This build connects to your Monero node automatically,
-  creates and restores wallets, and keeps every one of them open and refreshing
-  so they are never behind. It shows node status, per wallet sync progress and
-  balances.
+  v0.1.1: Fixes a failure to start. The app data directory is created by
+  exports.sh, which runs as root, while the container runs as uid 1000, so the
+  server could not create its own database and restarted in a loop. The
+  directory is now given to uid 1000 before the container starts. Same image as
+  v0.1.0, packaging fix only.
+
+  v0.1.0: First preview. Connects to your Monero node automatically, creates and
+  restores wallets, and keeps every one of them open and refreshing so they are
+  never behind. Shows node status, per wallet sync progress and balances.
 
   Sending is deliberately switched off in this build. The device pairing and
   passkey approval that guard spending are not finished, and shipping a send

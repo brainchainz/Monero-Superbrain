@@ -50,7 +50,15 @@ if [ -z "${APP_SEED:-}" ]; then
     fi
 fi
 
-# Wallet files, password files and the database live here. The container runs as
-# uid 1000, matching the umbrel user, so it can write its own data.
+# Wallet files, password files and the database live here.
+#
+# exports.sh runs as root, so anything created here is root owned, while the
+# container runs as uid 1000. The Dockerfile chowns /data, but a bind mount
+# takes the host's ownership and overrides that, so the chown has to happen
+# here or the server cannot even create its database. Buzz hit the same thing.
+#
+# Order matters: chown before chmod, or 700 leaves the directory unusable by
+# the container's uid.
 mkdir -p "${EXPORTS_APP_DIR}/data/wallets" 2>/dev/null || true
+chown -R 1000:1000 "${EXPORTS_APP_DIR}/data" 2>/dev/null || true
 chmod 700 "${EXPORTS_APP_DIR}/data/wallets" 2>/dev/null || true
