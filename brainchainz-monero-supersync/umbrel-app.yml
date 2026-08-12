@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.1.1"
+version: "0.2.0"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -41,6 +41,20 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v0.2.0: Device pairing. Open the app, set up the first device, then use Pair
+  another device to show a QR your phone can scan. The code changes every 30
+  seconds. Your phone shows a four digit number and the first screen offers
+  three; tap the one your phone shows. A wrong tap cancels pairing, so someone
+  who photographed the screen gets one chance in three, once.
+
+  Every request from a paired device is signed by a key generated on that
+  device and held in hardware the page cannot read.
+
+  Sending is now possible, guarded by each device's role and daily limit. There
+  is no biometric step in this build, so set a limit per device on the Devices
+  screen and keep it to what you would not mind losing. Serving the app over
+  HTTPS enables Face ID or fingerprint approval on top.
+
   v0.1.1: Fixes a failure to start. The app data directory is created by
   exports.sh, which runs as root, while the container runs as uid 1000, so the
   server could not create its own database and restarted in a loop. The
