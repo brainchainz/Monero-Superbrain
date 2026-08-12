@@ -1,0 +1,56 @@
+manifestVersion: 1.1
+id: brainchainz-monero-supersync
+category: finance
+name: Monero SuperSync
+icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
+version: "0.1.0"
+tagline: A Monero wallet that is already synced when you open it
+description: >-
+  Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
+  your own node, around the clock. By the time you reach for your phone the
+  balance is already correct. There is no sync bar and nothing to wait for.
+
+  Your phone runs no app at all. It opens a web page over your tailnet, and that
+  page is the wallet: balance, receive with a fresh subaddress every time, send,
+  and full transaction history.
+
+  Pocket Change, borrowed from Monerujo, keeps several unlocked outputs ready so
+  a second payment does not have to wait out the twenty minute change lock.
+
+  Run as many wallets as you like. Spending, savings, business. Every one of them
+  is open and synced at the same time, so switching between them is instant.
+
+  IMPORTANT, please read before funding this. This is a hot wallet. The spend key
+  lives on your server so that it can stay synced without you, and the wallet
+  password sits on disk beside it. Anyone who reaches this app and passes a
+  device check can spend. Reach it only over Tailscale or your local network,
+  never expose it to the internet, and keep only what you would carry in your
+  pocket. Your savings belong in a wallet whose keys live on hardware you hold.
+developer: SirJamzAlot
+website: https://github.com/brainchainz/Monero-Superbrain
+repo: https://github.com/brainchainz/Monero-Superbrain
+support: https://github.com/brainchainz/Monero-Superbrain/issues
+port: 4051
+dependencies:
+  - monero
+gallery:
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/gallery/1.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/gallery/2.png
+  - https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/gallery/3.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  v0.1.0: First preview. This build connects to your Monero node automatically,
+  creates and restores wallets, and keeps every one of them open and refreshing
+  so they are never behind. It shows node status, per wallet sync progress and
+  balances.
+
+  Sending is deliberately switched off in this build. The device pairing and
+  passkey approval that guard spending are not finished, and shipping a send
+  button without them would mean anyone who could reach the app could move your
+  funds. Receiving works, so you can point it at a wallet and watch it stay
+  caught up.
+
+  Treat this as a preview. Restore a wallet you already have a backup of, or
+  create a fresh one and keep the amount small.
