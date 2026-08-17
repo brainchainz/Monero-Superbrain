@@ -111,8 +111,16 @@ if [ -f /data/.env ]; then . /data/.env; fi
 
 THREADS="${XMRIG_THREADS:-0}"
 
-echo 1280 > /proc/sys/vm/nr_hugepages 2>/dev/null
-echo 3 > /proc/sys/vm/nr_hugepages_mempolicy 2>/dev/null
+# Best-effort hugepages for RandomX. Writing /proc/sys/vm/* requires privilege
+# the container may not have (we no longer run privileged:true). If the write
+# fails, xmrig still runs — just without the ~10% hugepage boost — so don't
+# hard-fail. XMRig itself also falls back gracefully without 1GB pages.
+if echo 1280 > /proc/sys/vm/nr_hugepages 2>/dev/null; then
+    echo 3 > /proc/sys/vm/nr_hugepages_mempolicy 2>/dev/null
+    echo "[superbrain] hugepages configured (1280)"
+else
+    echo "[superbrain] WARN: cannot write nr_hugepages (no privilege) — mining continues without hugepage boost"
+fi
 sleep 2
 
 THREAD_ARG=""
@@ -122,6 +130,7 @@ fi
 
 echo "[superbrain] starting xmrig (threads: ${THREADS:-auto})"
 
+# --randomx-1gb-pages and --huge-pages-jit are no-ops if hugepages unavailable.
 exec xmrig \
     --config=/dev/null \
     -o xmrig-proxy:8888 \

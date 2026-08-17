@@ -97,7 +97,10 @@ services:
     image: sirjamzalot/superbrain-xmrig:v1.1
     container_name: monero_superbrain_xmrig
     restart: always
-    privileged: true
+    # privileged:true removed — it grants host-root-equivalent access and the
+    # App Store requires justification for it. The start script now attempts
+    # the hugepages sysctl best-effort and mines without it if denied, so full
+    # privilege is not required for the default path.
     depends_on:
       - xmrig-proxy
     environment:
