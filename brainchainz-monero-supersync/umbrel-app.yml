@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.1"
+version: "0.2.2"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -40,6 +40,24 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+user_config:
+  - id: APP_MONERO_SUPERSYNC_PUBLIC_ORIGIN
+    name: Public Origin (HTTPS URL)
+    description: >-
+      The HTTPS address where you access this app, e.g.
+      https://umbrel.tail12345.ts.net. Required for passkey/Face ID
+      approval. Leave blank to disable passkeys (daily limit still applies).
+    type: text
+    default: ""
+    required: false
+  - id: APP_MONERO_SUPERSYNC_REQUIRE_PASSKEY
+    name: Require Passkey for Spending
+    description: >-
+      When enabled, sending requires biometric approval (Face ID, fingerprint)
+      on your paired device. Requires Public Origin to be set to an HTTPS URL.
+    type: toggle
+    default: false
+    required: false
 releaseNotes: >-
   v0.2.1: Fixes the "Cannot read properties of undefined (reading
   'generateKey')" crash on the setup screen. The Web Crypto API is only
