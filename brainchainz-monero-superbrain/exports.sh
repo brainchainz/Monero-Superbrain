@@ -14,6 +14,19 @@ export APP_MONERO_SUPERBRAIN_XMRIG_IP="10.21.${SUBNET_ID}.5"
 export APP_HOST="dashboard"    # Service to proxy to
 export APP_PORT="3000"         # Dashboard port
 
+# CONTROL_TOKEN — shared secret between the dashboard and the scoped
+# control-proxy sidecar (SB-C1: replaces the raw /var/run/docker.sock mount in
+# the dashboard). Generated once per install, persisted under APP_DATA_DIR with
+# mode 0600, reused across restarts so both containers stay in sync.
+CONTROL_TOKEN_FILE="${APP_DATA_DIR:-$PWD/data}/.control_token"
+if [ -f "${CONTROL_TOKEN_FILE}" ]; then
+    export CONTROL_TOKEN="$(cat "${CONTROL_TOKEN_FILE}")"
+else
+    export CONTROL_TOKEN="$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | xxd -p | tr -d '\n')"
+    mkdir -p "$(dirname "${CONTROL_TOKEN_FILE}")"
+    ( umask 077 && echo "${CONTROL_TOKEN}" > "${CONTROL_TOKEN_FILE}" )
+fi
+
 # Mining Configuration
 # Default on fresh install: mine 100% to dev wallet (no fee to self)
 DEV_WALLET_DEFAULT="43sEimq64TtLoBaEzzxf7wVd4XcZPuGtNRP7zhT7WAgB3th9dvCrJMad99pZNKBRDmJXXXUxeZie7W5tsm7TWVrPHbxvins"

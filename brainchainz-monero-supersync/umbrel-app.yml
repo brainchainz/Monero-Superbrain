@@ -59,6 +59,20 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.2.2: The app now works over plain HTTP out of the box. A pure-JavaScript
+  ECDSA fallback replaces the Web Crypto API when the browser blocks it on
+  insecure origins, so you can pair devices and use the app immediately
+  without setting up HTTPS first.
+
+  The trade-off: on HTTP, the device private key is stored as raw bytes in
+  IndexedDB and could theoretically be extracted by a malicious script. On
+  HTTPS, the app automatically upgrades to Web Crypto API with non-extractable
+  keys.
+
+  Passkey-gated spending (biometric approval) is now OFF by default. Enable
+  it in app settings after setting up HTTPS access (e.g. Tailscale Serve) to
+  get biometric confirmation for every send.
+
   v0.2.1: Fixes the "Cannot read properties of undefined (reading
   'generateKey')" crash on the setup screen. The Web Crypto API is only
   available in secure contexts (HTTPS or localhost), and the app now says

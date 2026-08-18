@@ -33,13 +33,37 @@ services:
       # Umbrel home servers have no VPN; clearnet stays opt-in only.
       - TOR_PROXY_URL=socks5h://monero_superbrain_tor:9050
       - OBSERVER_ALLOW_CLEARNET=${OBSERVER_ALLOW_CLEARNET:-false}
+      # Scoped Docker control goes through the control-proxy sidecar, not a
+      # mounted host socket. CONTROL_TOKEN is generated per-install in exports.sh
+      # and shared only between these two containers.
+      - CONTROL_PROXY_URL=http://monero_superbrain_control_proxy:2375
+      - CONTROL_TOKEN=${CONTROL_TOKEN}
     networks:
       - default
       - umbrel_main_network
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # No /var/run/docker.sock here — App Store gate. The control-proxy sidecar
+      # is the only container that touches the socket, and it is not LAN-reachable.
       - ${APP_DATA_DIR:-/data}:/data
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
+
+  # Scoped Docker control sidecar. Holds the host socket but exposes ONLY a
+  # token-gated, allowlisted set of operations on this app's own containers
+  # (start/stop/restart, logs, minimal inspect, one read-only exec probe).
+  # Joins only the internal default network — never umbrel_main_network — so it
+  # is unreachable from the LAN / app_proxy.
+  control-proxy:
+    image: sirjamzalot/superbrain-control-proxy:v1.0
+    container_name: monero_superbrain_control_proxy
+    restart: always
+    environment:
+      - CONTROL_TOKEN=${CONTROL_TOKEN}
+      - CONTROL_BIND=0.0.0.0
+      - CONTROL_PORT=2375
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - default
 
   # Tor SOCKS proxy for private observer API access (no VPN on Umbrel).
   # Custom current Tor (alpine-based, multi-arch); getumbrel/tor is abandoned
