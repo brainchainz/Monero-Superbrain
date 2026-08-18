@@ -18,7 +18,7 @@ services:
   server:
     # Pinned by digest as well as tag, so a retagged image cannot silently
     # replace the one that was tested. Bump both together on release.
-    image: sirjamzalot/monero-supersync:0.2.0@sha256:5d3522500439928fe1ae82210052ee3ec4d5cd311af4e2b21f93115b735e353b
+    image: sirjamzalot/monero-supersync:0.2.1@sha256:0efe0d65143099594ca6ed562502b7efd872b154ce3b797604280a175e4fff43
     container_name: brainchainz_monero_supersync_server
     restart: on-failure
     stop_grace_period: 1m

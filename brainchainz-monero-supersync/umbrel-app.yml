@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.0"
+version: "0.2.1"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -41,6 +41,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v0.2.1: Fixes the "Cannot read properties of undefined (reading
+  'generateKey')" crash on the setup screen. The Web Crypto API is only
+  available in secure contexts (HTTPS or localhost), and the app now says
+  so plainly instead of failing with an opaque JavaScript error.
+
   v0.2.0: Device pairing. Open the app, set up the first device, then use Pair
   another device to show a QR your phone can scan. The code changes every 30
   seconds. Your phone shows a four digit number and the first screen offers
