@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.6"
+version: "0.2.7"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -59,6 +59,11 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.2.7: If this browser holds a key the server no longer recognises, and
+  setup is open again, the stale key is now cleared automatically and setup is
+  offered. Previously that combination left you on the "not paired" screen
+  being told to pair from a device that no longer existed.
+
   v0.2.6: Fixes device pairing, which could not work at all over plain HTTP.
 
   The fallback SHA-256 used when the browser has no Web Crypto encoded its
