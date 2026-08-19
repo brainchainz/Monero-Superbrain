@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.8"
+version: "0.3.0"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -59,6 +59,24 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.3.0: Rebuilt around the way you actually use it. Open the app and you are
+  in. There is no setup screen and nothing to pair before you can do anything,
+  because Umbrel already knows who you are. Create and restore wallets, watch
+  them sync, and connect a phone.
+
+  Connecting a phone now takes one code. Tap Connect a device, scan the QR, and
+  the phone opens a wallet screen built for a phone rather than a shrunken
+  desktop page. Cannot scan? The code is printed underneath, and the address the
+  phone should use is editable.
+
+  Phones connect on port 4052, which is published directly rather than through
+  Umbrel's login, because a phone cannot complete that login. It serves only the
+  mobile wallet and requires a device token. No admin function exists on it: not
+  creating wallets, not connecting other devices, not reading a seed.
+
+  Each phone is view-only until you say otherwise, and any spending limit you
+  set is enforced on the server.
+
   v0.2.8: The pairing screen no longer assumes the other device can reach this
   app at the same address this browser uses. The QR target is now shown and can
   be changed, and the pairing code is displayed as text so it can be typed in

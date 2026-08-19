@@ -26,17 +26,16 @@ export SUBNET_ID="41"
 # service in docker-compose.yml instead.
 export APP_MONERO_SUPERSYNC_PORT="4051"
 
+# The port phones connect on. It is published directly to the host rather than
+# through Umbrel's app proxy, because a phone cannot complete an Umbrel login.
+# It serves only the mobile wallet and requires a device token.
+export APP_MONERO_SUPERSYNC_DEVICE_PORT="4052"
+
 # Monero node, supplied by the official Monero app
 export APP_MONERO_NODE_IP="${APP_MONERO_NODE_IP:-monero_monerod_1}"
 export APP_MONERO_RPC_PORT="${APP_MONERO_RPC_PORT:-18081}"
 export APP_MONERO_RPC_USER="${APP_MONERO_RPC_USER:-monero}"
 export APP_MONERO_RPC_PASS="${APP_MONERO_RPC_PASS:-monero}"
-
-# Spend guard. Passkeys need HTTPS, so they are off by default and a paired
-# device's daily limit is the only cap on sending. Point PUBLIC_ORIGIN at an
-# https address and set REQUIRE_PASSKEY=true to add the biometric step.
-export APP_MONERO_SUPERSYNC_REQUIRE_PASSKEY="${APP_MONERO_SUPERSYNC_REQUIRE_PASSKEY:-false}"
-export APP_MONERO_SUPERSYNC_PUBLIC_ORIGIN="${APP_MONERO_SUPERSYNC_PUBLIC_ORIGIN:-}"
 
 # Display currency for the balance
 export APP_MONERO_SUPERSYNC_FIAT="${APP_MONERO_SUPERSYNC_FIAT:-USD}"
