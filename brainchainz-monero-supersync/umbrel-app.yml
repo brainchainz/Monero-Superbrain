@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.4"
+version: "0.2.5"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -59,6 +59,10 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.2.5: Fix unpaired screen. The "Not paired" screen now explains the pairing
+  process clearly and includes a form to enter a pairing code manually, instead
+  of just telling the user to go to another device with no way to proceed.
+
   v0.2.4: UI polish with animations and refined interactions. The pairing screen
   now has a fade-in QR code and pulsing confirmation number. Device rows have
   subtle hover states. Loading states show a shimmer animation. Focus outlines
