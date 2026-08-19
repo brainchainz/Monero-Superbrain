@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.7"
+version: "0.2.8"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -59,6 +59,15 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.2.8: The pairing screen no longer assumes the other device can reach this
+  app at the same address this browser uses. The QR target is now shown and can
+  be changed, and the pairing code is displayed as text so it can be typed in
+  when scanning will not work.
+
+  This matters when the two devices reach the app differently. A browser on
+  https would previously hand the other device an https link to a server that
+  only speaks http, which fails with ERR_SSL_PROTOCOL_ERROR.
+
   v0.2.7: If this browser holds a key the server no longer recognises, and
   setup is open again, the stale key is now cleared automatically and setup is
   offered. Previously that combination left you on the "not paired" screen
