@@ -3,7 +3,7 @@ id: brainchainz-monero-supersync
 category: finance
 name: Monero SuperSync
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-supersync/icon.png
-version: "0.2.5"
+version: "0.2.6"
 tagline: A Monero wallet that is already synced when you open it
 description: >-
   Monero SuperSync keeps your wallet open and refreshing on your Umbrel, against
@@ -59,6 +59,17 @@ user_config:
     default: false
     required: false
 releaseNotes: >-
+  v0.2.6: Fixes device pairing, which could not work at all over plain HTTP.
+
+  The fallback SHA-256 used when the browser has no Web Crypto encoded its
+  message length field incorrectly, so every signed request was signed over the
+  wrong digest and rejected. Pairing failed with "that pairing code is not
+  valid", but the real cause was three steps earlier: no paired device could
+  authenticate, so no pairing code was ever created.
+
+  If a device was paired before this update it should start working again on
+  its own, since its key was always valid and only the hashing was wrong.
+
   v0.2.5: Fix unpaired screen. The "Not paired" screen now explains the pairing
   process clearly and includes a form to enter a pairing code manually, instead
   of just telling the user to go to another device with no way to proceed.
