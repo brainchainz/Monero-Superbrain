@@ -14,17 +14,25 @@ export APP_MONERO_SUPERBRAIN_XMRIG_IP="10.21.${SUBNET_ID}.5"
 export APP_HOST="dashboard"    # Service to proxy to
 export APP_PORT="3000"         # Dashboard port
 
+# APP_DATA_DIR must be resolved before the token code and the generated
+# container scripts use it. umbrelOS exports this before sourcing exports.sh,
+# but the fallback keeps local/standalone runs consistent.
+export APP_DATA_DIR="${APP_DATA_DIR:-$PWD/data}"
+
 # CONTROL_TOKEN — shared secret between the dashboard and the scoped
 # control-proxy sidecar (SB-C1: replaces the raw /var/run/docker.sock mount in
 # the dashboard). Generated once per install, persisted under APP_DATA_DIR with
 # mode 0600, reused across restarts so both containers stay in sync.
-CONTROL_TOKEN_FILE="${APP_DATA_DIR:-$PWD/data}/.control_token"
-if [ -f "${CONTROL_TOKEN_FILE}" ]; then
+CONTROL_TOKEN_FILE="${APP_DATA_DIR}/.control_token"
+if [ -s "${CONTROL_TOKEN_FILE}" ]; then
     export CONTROL_TOKEN="$(cat "${CONTROL_TOKEN_FILE}")"
 else
-    export CONTROL_TOKEN="$(openssl rand -hex 32 2>/dev/null || head -c 64 /dev/urandom | xxd -p | tr -d '\n')"
+    export CONTROL_TOKEN="$(openssl rand -hex 32 2>/dev/null || od -An -N32 -tx1 /dev/urandom | tr -d ' \n')"
+    if [ -z "${CONTROL_TOKEN}" ]; then
+        echo "[superbrain] ERROR: could not generate CONTROL_TOKEN" >&2
+    fi
     mkdir -p "$(dirname "${CONTROL_TOKEN_FILE}")"
-    ( umask 077 && echo "${CONTROL_TOKEN}" > "${CONTROL_TOKEN_FILE}" )
+    ( umask 077 && printf '%s\n' "${CONTROL_TOKEN}" > "${CONTROL_TOKEN_FILE}" )
 fi
 
 # Mining Configuration
@@ -53,7 +61,6 @@ export APP_MONERO_RPC_USER="${APP_MONERO_RPC_USER:-monero}"
 export APP_MONERO_RPC_PASS="${APP_MONERO_RPC_PASS:-monero}"
 
 # Umbrel Environment
-export APP_DATA_DIR="${APP_DATA_DIR:-$PWD/data}"
 export DEVICE_DOMAIN_NAME="${DEVICE_DOMAIN_NAME:-umbrel.local}"
 
 # -- Generate container startup scripts --

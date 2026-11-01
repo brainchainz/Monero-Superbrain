@@ -7,13 +7,12 @@ services:
       - APP_HOST=monero_superbrain_dashboard
       - APP_PORT=3000
       - LOG_LEVEL=debug
-      - PROXY_AUTH_ADD_HEADER_PREFIX=***
     networks:
       - default
       - umbrel_main_network
 
   dashboard:
-    image: sirjamzalot/monero-superbrain-dashboard:v1.4.3
+    image: sirjamzalot/monero-superbrain-dashboard:v1.5.0
     container_name: monero_superbrain_dashboard
     restart: always
     environment:
@@ -41,17 +40,20 @@ services:
     networks:
       - default
       - umbrel_main_network
+      - control
     volumes:
       # No /var/run/docker.sock here — App Store gate. The control-proxy sidecar
-      # is the only container that touches the socket, and it is not LAN-reachable.
+      # is the only container that touches the socket, and it is isolated on the
+      # internal `control` network.
       - ${APP_DATA_DIR:-/data}:/data
       - /home/umbrel/umbrel/app-data/monero:/home/umbrel/umbrel/app-data/monero:ro
 
   # Scoped Docker control sidecar. Holds the host socket but exposes ONLY a
   # token-gated, allowlisted set of operations on this app's own containers
   # (start/stop/restart, logs, minimal inspect, one read-only exec probe).
-  # Joins only the internal default network — never umbrel_main_network — so it
-  # is unreachable from the LAN / app_proxy.
+  # Joins only the internal `control` network, shared with the dashboard. It is
+  # not on `default` or `umbrel_main_network`, so p2pool/xmrig/tor/app_proxy
+  # cannot reach it.
   control-proxy:
     image: sirjamzalot/superbrain-control-proxy:v1.0
     container_name: monero_superbrain_control_proxy
@@ -63,7 +65,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - default
+      - control
 
   # Tor SOCKS proxy for private observer API access (no VPN on Umbrel).
   # Custom current Tor (alpine-based, multi-arch); getumbrel/tor is abandoned
@@ -142,5 +144,8 @@ networks:
       driver: default
       config:
         - subnet: 10.99.99.0/24
+  control:
+    # Isolates the Docker-socket sidecar from the mining/app network.
+    internal: true
   umbrel_main_network:
     external: true

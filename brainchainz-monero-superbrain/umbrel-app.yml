@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.4.3"
+version: "1.5.0"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,14 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.5.0: Security hardening. The dashboard no longer mounts the host Docker
+  socket; a token-gated control-proxy sidecar is the only socket holder and is
+  isolated on its own internal network. XMRig no longer runs privileged; hugepages
+  are best-effort. Added per-install CONTROL_TOKEN persistence, tightened the
+  control-proxy allowlists, and removed a leftover app-proxy placeholder variable.
+  Fresh installs still default to the dev wallet; after setting your own wallet,
+  the default dev fee is 1% (set DEV_FEE_PERCENT=0 to disable). Same Tor observer
+  privacy behavior as v1.4.3.
   v1.4.3: Closes a privacy gap: the pool-hashrate lookup was still hitting the
   observer over clearnet. Every observer request (payouts, shares, and pool
   hashrate) now goes over Tor. Same features as v1.4.0.
