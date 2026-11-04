@@ -17,8 +17,9 @@ services:
   # listen on 127.0.0.1 only and are unreachable from outside the container.
   server:
     # Pinned by digest as well as tag, so a retagged image cannot silently
-    # replace the one that was tested. Bump both together on release.
-    image: sirjamzalot/monero-supersync:0.3.0@sha256:f9cb23c502d3adaed14ecb8b776842dc6e357e5025359373fda6f9028d32eb33
+    # replace the one that was tested. The digest is the multi-arch index
+    # (linux/amd64 + linux/arm64); bump it together with the tag on release.
+    image: sirjamzalot/monero-supersync:0.3.0@sha256:4c5f55d5ba74352ef7f3484afd0585c71093debfa0e142b2d1c1ff8af406db78
     container_name: brainchainz_monero_supersync_server
     restart: on-failure
     stop_grace_period: 1m
