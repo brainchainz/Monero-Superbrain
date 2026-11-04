@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.5.0"
+version: "1.5.1"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.5.1: Moves p2pool to v4.18.1 (stratum performance + double-free fix,
+  peer-list and SOCKS5/LAN-node fixes, Tari merge-mining fixes). The dashboard
+  now rejects direct connections whose source is not Umbrel's app gateway
+  (source-address check) and leaves the shared umbrel_main_network, so sibling
+  app containers can no longer reach its unauthenticated API and change
+  mining settings or the wallet. Updates the (metadata-only) app proxy to
+  1.7.0. The v1.5.0 control-proxy hardening is unchanged.
   v1.5.0: Security hardening. The dashboard no longer mounts the host Docker
   socket; a token-gated control-proxy sidecar is the only socket holder and is
   isolated on its own internal network. XMRig no longer runs privileged; hugepages

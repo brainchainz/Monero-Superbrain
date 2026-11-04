@@ -1,6 +1,6 @@
 services:
   app_proxy:
-    image: getumbrel/app-proxy:1.0.0
+    image: getumbrel/app-proxy:1.7.0
     container_name: monero_superbrain_app_proxy
     restart: on-failure
     environment:
@@ -12,7 +12,7 @@ services:
       - umbrel_main_network
 
   dashboard:
-    image: sirjamzalot/monero-superbrain-dashboard:v1.5.0
+    image: sirjamzalot/monero-superbrain-dashboard:v1.5.1
     container_name: monero_superbrain_dashboard
     restart: always
     environment:
@@ -39,7 +39,12 @@ services:
       - CONTROL_TOKEN=${CONTROL_TOKEN}
     networks:
       - default
-      - umbrel_main_network
+      # Deliberately NOT on umbrel_main_network: the dashboard has no auth of
+      # its own, so keeping it off the shared network means sibling app
+      # containers cannot reach monero_superbrain_dashboard:3000 directly and
+      # change mining settings/wallet. Umbrel's app gateway reaches it over
+      # this app's own default bridge instead (published monerod RPC on the
+      # host covers node access; control-proxy covers container control).
       - control
     volumes:
       # No /var/run/docker.sock here — App Store gate. The control-proxy sidecar
@@ -80,7 +85,7 @@ services:
       - default
 
   p2pool:
-    image: sirjamzalot/superbrain-p2pool:v1.4.0
+    image: sirjamzalot/superbrain-p2pool:v1.4.1
     container_name: monero_superbrain_p2pool
     restart: always
     environment:

@@ -30,5 +30,7 @@ echo "MONERO_WALLET_RPC_URL=" >> "$APP_DATA_DIR/.env"
 echo "MONERO_WALLET_RPC_USER=" >> "$APP_DATA_DIR/.env"
 echo "MONERO_WALLET_RPC_PASSWORD=$MONEROD_PASS" >> "$APP_DATA_DIR/.env"
 echo "XMR_POLL_MS=3000" >> "$APP_DATA_DIR/.env"
+# The generated env file contains the Monero node RPC credentials; keep it owner-only.
+chmod 600 "$APP_DATA_DIR/.env"
 
 echo "[monero-space] exports.sh complete"

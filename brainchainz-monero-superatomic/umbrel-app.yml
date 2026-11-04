@@ -3,7 +3,7 @@ id: brainchainz-monero-superatomic
 category: finance
 name: Monero SuperAtomic
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superatomic/icon.png
-version: "0.4.11"
+version: "0.4.12"
 tagline: Run an Automated Swap Backend to provide XMR liquidity
 description: >-
   Monero SuperAtomic is a self-hosted Automated Swap Backend for XMR/BTC atomic
@@ -33,6 +33,8 @@ path: ""
 defaultPassword: null
 torOnly: false
 releaseNotes: >-
+  v0.4.12: Packaging security update. Moves the app proxy to 1.7.0. No image
+  change; same SuperAtomic dashboard.
   Privacy mode now masks swap and transaction timestamps as well. The swap and
   activity lists already hid amounts, addresses, and transaction ids, but the
   date and time of each entry can be correlated against the public blockchains

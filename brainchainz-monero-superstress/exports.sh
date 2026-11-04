@@ -24,5 +24,6 @@ if [ -z "${APP_SEED:-}" ]; then
             || head -c 64 /dev/urandom | xxd -p | tr -d '\n')
         mkdir -p "${APP_DATA_DIR}"
         echo "${APP_SEED}" > "${APP_SEED_FILE}"
+        chmod 600 "${APP_SEED_FILE}" 2>/dev/null || true
     fi
 fi

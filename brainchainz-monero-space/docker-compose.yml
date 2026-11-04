@@ -1,6 +1,6 @@
 services:
   app_proxy:
-    image: getumbrel/app-proxy:1.0.0
+    image: getumbrel/app-proxy:1.7.0
     container_name: brainchainz_monero_space_app_proxy
     restart: on-failure
     environment:

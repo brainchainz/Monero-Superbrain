@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: brainchainz-monero-space
 category: utilities
 name: MoneroSpace
-version: "1.0.13"
+version: "1.0.14"
 tagline: Self-hosted Monero block explorer and mempool visualizer
 description: >-
   MoneroSpace is a self-hosted Monero block explorer and mempool visualizer
@@ -29,5 +29,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.0.14: Packaging security update. Moves the app proxy to 1.7.0 and
+  restricts the generated .env containing the Monero node RPC credentials to
+  owner-only permissions. No image change; same explorer.
   v1.0.0: Initial release. Self-hosted MoneroSpace explorer connecting to the
   Umbrel Monero node with HTTP Digest authentication.

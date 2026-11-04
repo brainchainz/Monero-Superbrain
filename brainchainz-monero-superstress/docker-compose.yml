@@ -8,6 +8,7 @@ services:
     - APP_PORT=4050
     networks:
     - umbrel_main_network
+    - stressnet
   # Multi-arch Tor sidecar tuned for monerod P2P sync over Tor: SocksTimeout 15
   # (fail bad exits fast) + MaxCircuitDirtiness 86400 (stick to exits that
   # allow port 28080). Source: tor/ in the monero-superstress repo.
@@ -114,7 +115,9 @@ services:
     # whether a wallet file exists (otherwise every restart offered "Create",
     # which then failed with "file already exists").
     - ${APP_DATA_DIR}/spammer-wallet:/spammer-wallets:ro
-    - /var/run/docker.sock:/var/run/docker.sock
+    # No /var/run/docker.sock: a network-exposed container with the host socket
+    # is host-root. The web image guards Docker control behind a socket check;
+    # mining lifecycle is via Umbrel's app controls / host compose.
     - ${APP_DATA_DIR}/db:/data/db:ro
     depends_on:
     - monerod
@@ -122,7 +125,6 @@ services:
     - spammer-wallet-rpc
     networks:
     - stressnet
-    - umbrel_main_network
 networks:
   stressnet:
     driver: bridge

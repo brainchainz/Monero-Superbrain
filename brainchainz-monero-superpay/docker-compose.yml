@@ -1,7 +1,7 @@
 services:
   # Umbrel App Proxy (Required for Auth & Tor)
   app_proxy:
-    image: getumbrel/app-proxy:1.0.0
+    image: getumbrel/app-proxy:1.7.0
     container_name: brainchainz_superpay_app_proxy
     restart: on-failure
     environment:

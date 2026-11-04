@@ -3,7 +3,7 @@ id: brainchainz-monero-superstress
 category: finance
 name: Monero Superstress
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superstress/icon.png
-version: "1.8.6"
+version: "1.8.7"
 tagline: Stress-test the bleeding edge of Monero privacy
 description: >-
   Run a full Monero FCMP++ stressnet node on your Umbrel, routed exclusively
@@ -22,6 +22,10 @@ description: >-
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-
+  v1.8.7: Security hardening. Removes the host Docker socket from the web
+  container, so the network-exposed dashboard can no longer control Docker as
+  host root. Mining start/stop is now managed through Umbrel's app controls or
+  host compose rather than the dashboard tab. Generated app seed is owner-only.
   v1.8.6: Wallet tab fixup. Adds a Rescan control: a fast "Rescan" that
   re-checks which outputs are spent (fixes a stuck balance) and a "Full Rescan"
   that re-reads the chain and rebuilds history, both run in the background so

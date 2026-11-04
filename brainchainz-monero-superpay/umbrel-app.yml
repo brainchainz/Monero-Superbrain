@@ -3,7 +3,7 @@ id: brainchainz-monero-superpay
 category: finance
 name: Monero SuperPay
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superpay/icon.png
-version: "1.3.0"
+version: "1.3.1"
 tagline: Accept Monero payments with a full point-of-sale system
 description: >-
   Monero SuperPay is a self-hosted, trustless point-of-sale system for
@@ -35,6 +35,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.3.1: Packaging security update. Moves the app proxy to 1.7.0 and restricts
+  the generated app seed file to owner-only permissions. Same SuperPay v1.3.0
+  dashboard and images.
   v1.3.0: Themes. A new Appearance section in Settings lets you switch between
   five themes (Glass, Classic, Carbon, Ocean, Fintech), remembered per device.
   The default Glass theme is a crystal-glass look with a colorful animated mesh
