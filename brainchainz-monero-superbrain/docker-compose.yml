@@ -12,7 +12,7 @@ services:
       - umbrel_main_network
 
   dashboard:
-    image: sirjamzalot/monero-superbrain-dashboard:v1.5.1
+    image: sirjamzalot/monero-superbrain-dashboard:v1.5.2
     container_name: monero_superbrain_dashboard
     restart: always
     environment:
