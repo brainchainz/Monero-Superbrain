@@ -18,7 +18,7 @@ description: >-
   stressnet with test transactions.
 
 
-  All traffic is routed through Tor — zero clearnet connections. Your IP is
+  All traffic is routed through Tor, zero clearnet connections. Your IP is
   never exposed during testing. The stressnet has a low anonymity set, so Tor
   routing is critical for protecting testers.
 releaseNotes: >-

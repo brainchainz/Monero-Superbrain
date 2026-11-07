@@ -19,7 +19,7 @@ Community app store for [Umbrel OS](https://umbrel.com) featuring Monero-powered
 3. Click **Add** and paste: `https://github.com/brainchainz/Monero-Superbrain`
 4. Browse and install apps from the **Brainchainz** store
 
-Every app connects to the official **Monero** app, so install that first. MoneroSpace and Monero SuperAtomic also use **Bitcoin** and **Electrs** (SuperAtomic requires them).
+Every app connects to the official **Monero** app, so install that first. Monero SuperAtomic additionally uses **Bitcoin** and **Electrs**.
 
 ## Connecting External Miners (Superbrain)
 

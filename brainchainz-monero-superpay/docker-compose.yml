@@ -16,7 +16,7 @@ services:
     networks:
       - default
 
-  # Monero Wallet RPC (view-only wallet — no spend keys on server)
+  # Monero Wallet RPC (view-only wallet, no spend keys on server)
   # Connects to Umbrel's existing Monero node via umbrel_main_network
   monero-wallet-rpc:
     image: sethsimmons/simple-monero-wallet-rpc:v0.18.3.4
@@ -39,7 +39,7 @@ services:
       - default
       - umbrel_main_network
 
-  # Monero SuperPay — Dashboard + API + Web PoS
+  # Monero SuperPay: Dashboard + API + Web PoS
   web:
     image: sirjamzalot/monero-superpay:1.3.0
     container_name: brainchainz_superpay_web
