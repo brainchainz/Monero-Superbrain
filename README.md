@@ -43,6 +43,12 @@ including every patch and the CI workflow that builds the exact binaries.
 
 Open an issue: [github.com/brainchainz/Monero-Superbrain/issues](https://github.com/brainchainz/Monero-Superbrain/issues)
 
+## Donate
+
+If you'd like to support the project, you can donate Monero here:
+
+https://kuno.anne.media/fundraiser/ufmp/
+
 ---
 
 *Beta, feedback welcome.*
