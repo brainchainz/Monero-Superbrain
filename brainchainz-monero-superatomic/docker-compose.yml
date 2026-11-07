@@ -14,10 +14,9 @@ services:
 
   # Monero SuperAtomic: Eigen ASB + dashboard (ASB, Node/Express API, React UI,
   # nginx, supervisord) in one container.
-  # Forgejo test ref (has localhost:8101 = forgejo on this umbrel). Public
-  # release swaps this back to sirjamzalot/monero-superatomic:0.5.0.
+  # Public release image (Docker Hub) so the store pulls anywhere.
   server:
-    image: localhost:8101/brainchainz/monero-superatomic:0.5.0
+    image: sirjamzalot/monero-superatomic:0.5.0
     container_name: brainchainz_monero_superatomic_server
     restart: unless-stopped
     # ASB peer-to-peer swap port, published to the host for inbound peers
