@@ -111,6 +111,24 @@ max_buy_btc = 0.5
 ask_spread = 0.02
 refund_policy = { anti_spam_deposit_ratio = 0.2 }
 developer_tip = 0.01
-btc_redeem_fee_multiplier = 1.0
+# ASB 5.x renamed this field (was: btc_redeem_fee_multiplier) and validates it
+# to the range 2.0-4.0; older values/keys make asb exit(1) at startup.
+btc_redeem_base_fee_multiplier = 2.0
 CONFIG
+fi
+
+# --- Config migration (runs every start; idempotent) ---------------------------
+# ASB 5.x (image 0.5.0+) renamed [maker] btc_redeem_fee_multiplier to
+# btc_redeem_base_fee_multiplier and rejects both the old key ("unknown field")
+# and out-of-range values. Installs created before 0.5.0 keep their original
+# config.toml (it is generated once), so migrate it in place before the
+# container starts. Presence of the old key is its own guard: after rewriting,
+# the block is a no-op.
+if [ -f "${CONFIG_FILE}" ] && grep -Eq '^[[:space:]]*btc_redeem_fee_multiplier[[:space:]]*=' "${CONFIG_FILE}"; then
+    if [ ! -w "${CONFIG_FILE}" ]; then
+        echo "ERROR: ${CONFIG_FILE} contains the pre-5.x maker.btc_redeem_fee_multiplier field but is not writable; asb will not start until it is migrated." >&2
+    else
+        cp "${CONFIG_FILE}" "${CONFIG_FILE}.pre-5x-migration" 2>/dev/null || true
+        sed -i 's/^[[:space:]]*btc_redeem_fee_multiplier[[:space:]]*=.*/btc_redeem_base_fee_multiplier = 2.0/' "${CONFIG_FILE}"
+    fi
 fi
