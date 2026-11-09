@@ -101,9 +101,10 @@ network = "Mainnet"
 
 [tor]
 register_hidden_service = true
-# More introduction points than the default 5 give takers more Tor entry paths
-# to the maker's onion service, which improves inbound reachability.
-hidden_service_num_intro_points = 10
+# 3 introduction points (tor-client default): the service converges faster and
+# churns less on loaded/mined boxes, which keeps inbound reachability stable.
+# (This box previously ran 5/10 intro points, which caused intro-churn spirals.)
+hidden_service_num_intro_points = 3
 
 [maker]
 min_buy_btc = 0.001
