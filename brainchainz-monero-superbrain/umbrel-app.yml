@@ -25,14 +25,14 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.6.0: New built-in miner control. The dashboard's miner card is now an
-  explicit "Built-in Miner (this server only)" toggle: stopping it stops ONLY
+  v1.6.0: New Superbrain Miner control. The dashboard's miner card is now an
+  explicit "Superbrain Miner" toggle: stopping it stops ONLY
   the CPU miner inside this Umbrel and persists the choice (XMRIG_MINER_ENABLED
   in /data/.env), while P2Pool and the XMRig proxy keep running so other rigs
   on the LAN continue mining to the pool. The stop survives reboots (xmrig
   moved to restart:unless-stopped) and app updates (the start script re-reads
   the flag and idles instead of mining). The System Status row now reports the
-  built-in miner from its real container state instead of showing "Mining"
+  Superbrain miner from its real container state instead of showing "Mining"
   whenever the proxy has hashrate from other rigs. Dashboard image v1.6.0;
   control-proxy, p2pool, proxy, xmrig, tor images unchanged.
   v1.5.2: Hardens the dashboard direct-access guard further: requests are only
