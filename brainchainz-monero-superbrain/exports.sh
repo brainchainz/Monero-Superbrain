@@ -129,6 +129,20 @@ cat > "${APP_DATA_DIR}/scripts/start-xmrig.sh" << 'ENDSCRIPT'
 
 if [ -f /data/.env ]; then . /data/.env; fi
 
+# Built-in miner toggle, persisted by the dashboard (Built-in Miner card).
+# When XMRIG_MINER_ENABLED is false the built-in xmrig must NOT mine, but the
+# container still needs to stay up so `docker start` can re-enable it without
+# a compose recreate — so idle forever instead of exiting (an exit would just
+# be restarted by the compose policy in a pointless loop). p2pool and
+# xmrig-proxy are separate services and keep serving LAN miners either way.
+MINER_ENABLED="${XMRIG_MINER_ENABLED:-true}"
+case "$MINER_ENABLED" in
+    false|0|no|off|False|FALSE|Off|OFF)
+        echo "[superbrain] built-in miner disabled via dashboard (XMRIG_MINER_ENABLED=$MINER_ENABLED) — idling; p2pool/xmrig-proxy unaffected"
+        exec sleep infinity
+        ;;
+esac
+
 THREADS="${XMRIG_THREADS:-0}"
 
 # Best-effort hugepages for RandomX. Writing /proc/sys/vm/* requires privilege
