@@ -127,7 +127,7 @@ services:
   xmrig:
     image: sirjamzalot/superbrain-xmrig:v1.1
     container_name: monero_superbrain_xmrig
-    # unless-stopped (not always): the dashboard's built-in-miner toggle does
+    # unless-stopped (not always): the dashboard's Superbrain Miner toggle does
     # a manual docker stop, and with restart:always a daemon restart/reboot
     # would resurrect even a manually-stopped container. unless-stopped keeps
     # it off across reboots. App updates recreate the container anyway; the

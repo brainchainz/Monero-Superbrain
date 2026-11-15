@@ -138,7 +138,7 @@ if [ -f /data/.env ]; then . /data/.env; fi
 MINER_ENABLED="${XMRIG_MINER_ENABLED:-true}"
 case "$MINER_ENABLED" in
     false|0|no|off|False|FALSE|Off|OFF)
-        echo "[superbrain] built-in miner disabled via dashboard (XMRIG_MINER_ENABLED=$MINER_ENABLED) — idling; p2pool/xmrig-proxy unaffected"
+        echo "[superbrain] superbrain miner disabled via dashboard (XMRIG_MINER_ENABLED=$MINER_ENABLED) — idling; p2pool/xmrig-proxy unaffected"
         exec sleep infinity
         ;;
 esac
