@@ -92,7 +92,7 @@ All apps follow the same Umbrel packaging pattern, which is worth understanding 
 **What it is.** An Automated Swap Backend (ASB) for the [Eigen](https://eigenwallet.org) XMR/BTC atomic swap network, packaged for Umbrel. You provide Monero liquidity, takers swap BTC for your XMR, and you earn the spread plus fees.
 
 **How it works.**
-- The swap engine is a patched **GPLv3 fork of [eigenwallet/core](https://github.com/eigenwallet/core)**, currently upstream 5.0.2. The complete corresponding source lives at [github.com/brainchainz/eigenwallet-core](https://github.com/brainchainz/eigenwallet-core).
+- The swap engine is a patched **GPLv3 fork of [eigenwallet/core](https://github.com/eigenwallet/core)**, currently upstream 5.0.5. The complete corresponding source lives at [github.com/brainchainz/eigenwallet-core](https://github.com/brainchainz/eigenwallet-core).
 - The app runs the ASB plus a dashboard: funding, swap list, balances, BTC withdrawal, peer connectivity, logs, encrypted backup and restore, and config.
 - It connects to your local Monero node and to your local **Bitcoin + Electrs** apps. BTC legs settle on-chain (no Lightning).
 - Your ASB publishes a peer port (`9939`) so takers on the network can reach it.
