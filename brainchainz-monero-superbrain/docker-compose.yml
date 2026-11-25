@@ -111,7 +111,7 @@ services:
       - umbrel_main_network
 
   xmrig-proxy:
-    image: sirjamzalot/superbrain-proxy:v1.1
+    image: sirjamzalot/superbrain-proxy:v1.2
     container_name: monero_superbrain_proxy
     restart: always
     depends_on:
@@ -125,7 +125,7 @@ services:
       - default
 
   xmrig:
-    image: sirjamzalot/superbrain-xmrig:v1.1
+    image: sirjamzalot/superbrain-xmrig:v1.2
     container_name: monero_superbrain_xmrig
     # unless-stopped (not always): the dashboard's Superbrain Miner toggle does
     # a manual docker stop, and with restart:always a daemon restart/reboot
