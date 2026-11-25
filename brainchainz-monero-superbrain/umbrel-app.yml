@@ -3,7 +3,7 @@ id: brainchainz-monero-superbrain
 category: utilities
 name: Monero Superbrain
 icon: https://raw.githubusercontent.com/brainchainz/Monero-Superbrain/main/brainchainz-monero-superbrain/icon.png
-version: "1.6.0"
+version: "1.6.1"
 tagline: Decentralized Monero mining with P2Pool, XMRig, and web dashboard
 description: >-
   Complete Monero mining setup featuring decentralized mining pool (P2Pool), miner connection manager (XMRig-proxy),
@@ -25,6 +25,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v1.6.1: Miner and proxy updated to XMRig v6.27.0. Brings the FCMP++ block
+  template layout update so shares stay valid as pools adopt the new template,
+  ARM64 RandomX JIT optimizations (roughly 8 percent more hashrate on Apple
+  Silicon and other ARM boxes), and an OpenSSL 4.0 build fix. Donate level is
+  still forced to 0 at compile time and the donation pool hostnames are
+  removed from the binary. xmrig and xmrig-proxy images v1.2; dashboard,
+  control-proxy, p2pool, and tor images unchanged.
   v1.6.0: New Superbrain Miner control. The dashboard's miner card is now an
   explicit "Superbrain Miner" toggle: stopping it stops ONLY
   the CPU miner inside this Umbrel and persists the choice (XMRIG_MINER_ENABLED
